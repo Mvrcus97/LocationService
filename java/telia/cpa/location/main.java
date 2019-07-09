@@ -19,6 +19,7 @@ public class main {
         System.out.println();
         System.out.println(client.toString());
 
+        System.out.println("KOMMMMMENTAR");
     }
 
 }
