@@ -1,0 +1,10 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'main.java'
+
+jar {
+  manifest {
+    attributes 'Main-Class' : 'no.differitas._2015._10.coveragearea.CoverageAreaInvoker'
+  }
+}
