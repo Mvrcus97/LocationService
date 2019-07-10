@@ -2,12 +2,19 @@ package telia.cpa.location;
 
 public class Point {
 
-        long x;
-        long y;
+        double x;
+        double y;
 
-        public Point(int x, int y){
+        public Point(double x, double y){
             this.x = x;
-            this.y = x;
+            this.y = y;
         }
 
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
 }

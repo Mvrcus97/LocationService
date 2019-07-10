@@ -2,8 +2,10 @@ package telia.cpa.location;
 
 public class main {
     public static void main(String[] args) {
-        no.telia.cpa.location.CoverageAreaInvoker client = new no.telia.cpa.location.CoverageAreaInvoker();
 
+        Point polygon[] = {} 
+
+        no.telia.cpa.location.CoverageAreaInvoker client = new no.telia.cpa.location.CoverageAreaInvoker();
 
         client.setMsisdn("4793859166");
         System.out.println("Location of number: " + client.getMsisdn() + " is:  " + client.getLocation());
@@ -18,6 +20,8 @@ public class main {
 
         System.out.println();
         System.out.println(client.toString());
+
+
 
     }
 
