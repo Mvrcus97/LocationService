@@ -15,7 +15,7 @@ public class main {
         System.out.println("Country: " + client.getCountry() + ", County: " + client.getCounty() + ", Council: " + client.getCouncil() + ", SubPart Area: " + client.getSubPartArea());
         System.out.println("Coverage Area: " + client.getMultiPolygon());
         System.out.println("Location time: "  + client.getLocationTime());
-
+        
         System.out.println();
         System.out.println(client.toString());
 
