@@ -3,13 +3,29 @@ package telia.cpa.location;
 public class CheckPosition {
 
     // check if q lies on segment p-r
-    public boolean onSegment(Point p, Point q, Point r) {
+    /*public boolean onSegment(Point start, Point q, Point end) {
 
-        if (q.x <= Math.max(p.x, r.x) && q.x >= Math.min(p.x, r.x) &&
-                q.y <= Math.max(p.y, r.y) && q.y >= Math.min(p.y, r.y)) {
+        if (q.x <= Math.max(start.x, end.x) && q.x >= Math.min(start.x, end.x) &&
+                q.y <= Math.max(start.y, end.y) && q.y >= Math.min(start.y, end.y)) {
             return true;
         }
         return false;
+    }*/
+
+    public boolean onSegment(Segment s, Point p) {
+
+        if (s == null || p == null){
+            return false;
+        }
+
+        /*}
+
+        if (p.x <= Math.max(s.a.x, s.b.x) && p.x >= Math.min(s.a.x, s.b.x) &&
+                p.y <= Math.max(s.a.y, s.b.y) && p.y >= Math.min(s.a.y, s.b.y)) {
+
+            return true;
+        }*/
+        return true;
     }
 
     // 0 - colinear, 1 - clockwise, 2 - counterclockwise
@@ -22,10 +38,9 @@ public class CheckPosition {
     }
 
 
-    // true if line segment (p1q1) and (p2q2) intersect
     public boolean doIntersect(Point p1, Point q1, Point p2, Point q2) {
 
-        int o1 = orientation(p1, q1, p2);
+        /*int o1 = orientation(p1, q1, p2);
         int o2 = orientation(p1, q1, q2);
         int o3 = orientation(p2, q2, p1);
         int o4 = orientation(p2, q1, p1);
@@ -33,13 +48,14 @@ public class CheckPosition {
         //general case
         if (o1 != o2 && o3 != o4) return true;
 
+        //special case
         if (o1 == 0 && onSegment(p1, p2, q1)) return true;
 
         if (o2 == 0 && onSegment(p1, q2, q1)) return true;
 
         if (o3 == 0 && onSegment(p2, q1, q2)) return true;
 
-        if (o4 == 0 && onSegment(p2, q1, q2)) return true;
+        if (o4 == 0 && onSegment(p2, q1, q2)) return true;*/
 
         return false;
     }
@@ -56,7 +72,7 @@ public class CheckPosition {
         if (n < 3) return false;
 
 
-        Point extreme = new Point(Double.POSITIVE_INFINITY, p.getY());
+        Point extreme = new Point(Double.POSITIVE_INFINITY, p.y);
 
         // count intersections of point with sides of polygon
         int count = 0;
@@ -70,9 +86,9 @@ public class CheckPosition {
 
                 // if point p is colinear with i-next, then check if it lies on i-next
                 // if yes -> return true, otherwise false
-                if (orientation(polygon[i], p, polygon[next]) == 0) {
+                /*if (orientation(polygon[i], p, polygon[next]) == 0) {
                     return onSegment(polygon[i], p, polygon[next]);
-                }
+                }*/
 
                 count++;
 
