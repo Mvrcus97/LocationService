@@ -3,7 +3,7 @@ package telia.cpa.location;
 public class main {
     public static void main(String[] args) {
 
-        Point polygon[] = {} 
+        //Point polygon[] = new Point[] {3.22, 5.75}, {6.42, 3.29}, {10.15, 4.83}, {10.15, 4.83}, {10.68, 8.83}, {7.48, 11.29}, {3.75, 9.75};
 
         no.telia.cpa.location.CoverageAreaInvoker client = new no.telia.cpa.location.CoverageAreaInvoker();
 

@@ -21,6 +21,7 @@ public class CheckPosition {
 
     }
 
+
     // true if line segment (p1q1) and (p2q2) intersect
     public boolean doIntersect(Point p1, Point q1, Point p2, Point q2){
 
@@ -44,9 +45,12 @@ public class CheckPosition {
     }
 
     // n vertices
-    boolean isInside(Point polygon[], int n, Point p){
+    boolean isInside(Point polygon[], Point p){
+
+        int n = polygon.length;
 
         if (n < 3) return false;
+
 
         Point extreme = new Point(Double.POSITIVE_INFINITY, p.getY());
 

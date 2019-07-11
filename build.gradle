@@ -8,3 +8,10 @@ jar {
     attributes 'Main-Class' : 'telia.cpa.location.main'
   }
 }
+
+repositories {
+  mavenCentral()
+}
+
+dependencies{
+}
