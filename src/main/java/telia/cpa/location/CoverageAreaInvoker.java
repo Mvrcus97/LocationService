@@ -138,6 +138,7 @@ public class CoverageAreaInvoker {
         Point p;
         //Parse the string into pairs of x and y values.
         String polygon = result.getCoverage();
+        if(polygon == null) return null;
         polygon = polygon.replaceAll(",", "");
         polygon = polygon.replaceAll("[((]", "");
         polygon = polygon.replaceAll("[))]", "");
