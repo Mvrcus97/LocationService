@@ -44,8 +44,6 @@ public class Segment {
 
             if (isBetween(point)) {
                 //vertical segment
-                System.out.println("WIth abs: " + Math.abs(b.x - a.x));
-                System.out.println("Without abs: " + (b.x - a.x));
                 if (Math.abs(b.x - a.x) < 0.0001){
                     return true;
                 }
@@ -54,29 +52,50 @@ public class Segment {
             double m = (b.y - a.y)/(b.x - a.x); // slope
             double c = -(m * a.x) + a.y; // interceptY
 
-            System.out.println("calcY: " + (m * point.x + c));
-            System.out.println("Y: " + point.y);
 
-        if (Math.abs((point.y - (m * point.x + c))) <= 0.0001){
-            return true;
+            if (Math.abs((point.y - (m * point.x + c))) <= 0.0001){
+                return true;
+            }
+
+            return false;
         }
+
+        // 0 - colinear, 1 - clockwise, 2 - counterclockwise
+        public int orientation(Point point) {
+            //double val = (b.y - a.y) * (point.x - b.x) - (b.x - a.x) * (point.y - b.y);
+            double val = (a.y - b.y) * (point.x - a.x) - (a.x - b.x) * (point.y - a.y);
+            if (val == 0) return 0;
+
+            return (val > 0) ? 1 : 2;
+
+        }
+
+    public boolean doIntersect(Segment other) {
+
+        int o1 = orientation(other.a);
+        int o2 = orientation(other.b);
+
+        int o3 = other.orientation(a);
+        int o4 = other.orientation(b);
+
+        //general case
+        if (o1 != o2 && o3 != o4) return true;
+
+        //special case
+        /*if ( o1 + o2 + o3 + o4 == 0) {
+            if(onSegment(other.a)) return true;
+        }*/
+
+        if (o1 == 0 && onSegment(other.a)) return true;
+
+        if (o2 == 0 && onSegment(other.b)) return true;
+
+        if (o3 == 0 && other.onSegment(a)) return true;
+
+        //if (o4 == 0 && other.onSegment(b)) return true;
+
 
         return false;
-        }
-
-        public void print(){
-            Point a = new Point(0,0);
-            Point b = new Point(5,5);
-            Point point = new Point(1,2);
-
-            double m = (b.y - a.y)/(b.x - a.x); // slope
-            double c = -(m * a.x) + a.y; // interceptY
-
-            double calcY = m * point.x + c;
-            double diff = point.y - (m * point.x + c);
-
-            System.out.println("CalcY: " + calcY);
-            System.out.println("Diff btwn calculatedY and Y: " + diff);
-        }
+    }
 
 }
