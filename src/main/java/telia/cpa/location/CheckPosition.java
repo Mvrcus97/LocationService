@@ -2,32 +2,6 @@ package telia.cpa.location;
 
 public class CheckPosition {
 
-    // check if q lies on segment p-r
-    /*public boolean onSegment(Point start, Point q, Point end) {
-
-        if (q.x <= Math.max(start.x, end.x) && q.x >= Math.min(start.x, end.x) &&
-                q.y <= Math.max(start.y, end.y) && q.y >= Math.min(start.y, end.y)) {
-            return true;
-        }
-        return false;
-    }*/
-
-    public boolean onSegment(Segment s, Point p) {
-
-        if (s == null || p == null){
-            return false;
-        }
-
-        /*}
-
-        if (p.x <= Math.max(s.a.x, s.b.x) && p.x >= Math.min(s.a.x, s.b.x) &&
-                p.y <= Math.max(s.a.y, s.b.y) && p.y >= Math.min(s.a.y, s.b.y)) {
-
-            return true;
-        }*/
-        return true;
-    }
-
     // 0 - colinear, 1 - clockwise, 2 - counterclockwise
     public int orientation(Point p, Point q, Point r) {
         double val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
