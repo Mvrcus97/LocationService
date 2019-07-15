@@ -1,13 +1,11 @@
-package no.telia.cpa.location;
+package telia.cpa.location;
 
 import no.differitas._2015._10.coveragearea.*;
+import telia.cpa.location.Point;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.xml.namespace.QName;
 import javax.xml.ws.BindingProvider;
@@ -55,7 +53,7 @@ public class CoverageAreaInvoker {
                     System.out.println("Updating Result...");
                     this.result = port.coverage(request);
                     this.lastCalled = System.currentTimeMillis();
-                } catch (Exception e){System.out.println("UpdateResult error.");}
+                } catch (Exception e){System.out.println("UpdateResult error: ");}
         }
         if(result == null){
             System.out.println("Response error: Response is null.");
@@ -129,6 +127,44 @@ public class CoverageAreaInvoker {
         return ret;
     }
 
+
+    /*
+      Returns a Point array of *47* points, as received by the SOAP API.
+      Points are currently returned in the (x,y) notation, aka (Latitude, Longitude)
+     */
+    public Point[] getPolygonAsPoints(){
+        updateResult();
+        Point[] points = new Point[47]; // Seems like the SOAP server only returns 47 Points.
+        Point p;
+        //Parse the string into pairs of x and y values.
+        String polygon = result.getCoverage();
+        if(polygon == null) return null;
+        polygon = polygon.replaceAll(",", "");
+        polygon = polygon.replaceAll("[((]", "");
+        polygon = polygon.replaceAll("[))]", "");
+
+        Scanner scanner = new Scanner(polygon);
+        int pair_pos = 0;
+        double[] pair = new double[2];
+        int  idx = 0;
+        while (scanner.hasNext()){
+            if (scanner.hasNextDouble()) {
+                pair[pair_pos] = scanner.nextDouble();
+                //System.out.println("Found: " + pair[pair_pos%2]);
+                pair_pos ++;
+                if(pair_pos == 2){
+                    points[idx++] = new Point(pair[0], pair[1]); // We get the points in (y,x). transform to (x,y).
+                    //System.out.println("New pair: "+ pair[1] + ", " + pair[0]);
+                    pair_pos = 0;
+                }
+            }
+            else{
+                scanner.next();
+            }
+        }
+        scanner.close();
+        return points;
+    }
 
 
 
