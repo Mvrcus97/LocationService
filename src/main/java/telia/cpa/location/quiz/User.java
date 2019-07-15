@@ -4,6 +4,7 @@ public class User {
     String msisdn;
     String firstName;
     String lastName;
+    String userName;
 
 
     public User(String msisdn){
@@ -29,5 +30,14 @@ public class User {
     public String getFullName(){
         return this.firstName + " " + this.lastName;
     }
+
+    public void setUserName(String userName){
+        this.userName = userName;
+    }
+    public String getUserName(){
+        return this.userName;
+    }
+
+
 
 }

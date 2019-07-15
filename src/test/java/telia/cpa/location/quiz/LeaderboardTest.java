@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -59,7 +60,33 @@ class LeaderboardTest {
         userScore.setScore(123);
         leaderboard.add(userScore);
 
-        leaderboard.
+        user = new User("123");
+        userScore = new UserScore(user);
+        userScore.setScore(231);
+        leaderboard.add(userScore);
+
+        user = new User("113");
+        userScore = new UserScore(user);
+        userScore.setScore(253);
+        leaderboard.add(userScore);
+
+        leaderboard.sort();
+
+        int prev = 10000;
+        List<UserScore> list = leaderboard.getUserScores();
+        for(UserScore s : list){
+            assertTrue(s.getScore() <= prev,s.getScore() + "larger than: " + prev);
+            prev = s.getScore();
+        }
+
+        list = leaderboard.getTopN(3);
+        assertEquals(list.get(0).getScore(), 256);
+        assertEquals(list.get(1).getScore(), 253);
+        assertEquals(list.get(2).getScore(), 253);
+
+        assertNotNull(leaderboard.getTopN(6));
+        assertNotNull(leaderboard.getTopN(100));
+
     }
 
 }

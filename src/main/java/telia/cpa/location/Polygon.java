@@ -2,6 +2,7 @@ package telia.cpa.location;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 /*
  * This class represent a Polygon.
@@ -51,6 +52,36 @@ public class Polygon {
     public double getMaxY(){return this.maxY;}
     public double getMinX(){return this.minX;}
     public double getMinY(){return this.minY;}
+
+    /*
+     * Transfrom a polygon string in the Well-Known Text format
+     * to a Polygon object.
+     */
+    public void createPolygonFromWKT(String WKT){
+        WKT = WKT.replaceAll(",", " ");
+        WKT = WKT.replaceAll("[((]", "");
+        WKT = WKT.replaceAll("[))]", "");
+
+        Scanner scanner = new Scanner(WKT);
+        int pair_pos = 0;
+        double[] pair = new double[2];
+        while (scanner.hasNext()){
+            if (scanner.hasNextDouble()) {
+                pair[pair_pos] = scanner.nextDouble();
+                //System.out.println("Found: " + pair[pair_pos]);
+                pair_pos ++;
+                if(pair_pos == 2){
+                    points.add( new Point(pair[0], pair[1]));
+                    System.out.println("New pair: "+ pair[0] + ", " + pair[1]);
+                    pair_pos = 0;
+                }
+            }
+            else{
+                scanner.next();
+            }
+        }
+        scanner.close();
+    }
 
 
 }//end Polygon

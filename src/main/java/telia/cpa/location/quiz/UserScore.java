@@ -9,10 +9,8 @@ public class UserScore {
         this.score = 0;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
-
+    public void setScore(int score) { this.score = score; }
+    public void updateScore(int extra){this.score += extra;}
     public int getScore() {
         return score;
     }

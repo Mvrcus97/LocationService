@@ -139,6 +139,7 @@ public class CoverageAreaInvoker {
         //Parse the string into pairs of x and y values.
         String polygon = result.getCoverage();
         if(polygon == null) return null;
+        System.out.println(polygon);
         polygon = polygon.replaceAll(",", "");
         polygon = polygon.replaceAll("[((]", "");
         polygon = polygon.replaceAll("[))]", "");
@@ -153,7 +154,7 @@ public class CoverageAreaInvoker {
                 //System.out.println("Found: " + pair[pair_pos%2]);
                 pair_pos ++;
                 if(pair_pos == 2){
-                    points[idx++] = new Point(pair[0], pair[1]); // We get the points in (y,x). transform to (x,y).
+                    points[idx++] = new Point(pair[0], pair[1]);
                     //System.out.println("New pair: "+ pair[1] + ", " + pair[0]);
                     pair_pos = 0;
                 }
