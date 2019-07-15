@@ -70,7 +70,12 @@ public class Polygon {
             return false;
         }
 
-        // count intersections of point with sides of polygon
+        for (int i = 0; i < points.size(); i++){
+            if (points.get(i) == p){
+                return true;
+            }
+        }
+
         int count = 0;
         int i = 0;
 
@@ -78,7 +83,6 @@ public class Polygon {
             int next = (i + 1) % n;
 
             Segment seg = new Segment(points.get(i), points.get(next));
-            // check if p-extreme intersects with polygon[i]-polygon[next]
             if (seg.doIntersect(ray)) {
 
                 // if point p is colinear with i-next, then check if it lies on i-next

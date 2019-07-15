@@ -57,7 +57,9 @@ public class PolygonTest {
         Point point1 = new Point(4,2);
         assertFalse(polygon.isInside(point1),"Point is outside polygon");
         Point point2 = new Point(5,3);
-        assertTrue(polygon.isInside(point2),"Point is on the edge of polygon");polygon = new Polygon();
+        assertTrue(polygon.isInside(point2),"Point is on the edge of polygon");
+        Point point0 = new Point(3,4);
+        assertTrue(polygon.isInside(point0),"Point is on the vertex of polygon");
 
         Polygon polygon1 = new Polygon();
         polygon1.addPoint(new Point(4,3));
@@ -76,6 +78,27 @@ public class PolygonTest {
         assertFalse(polygon1.isInside(point6),"Point is outside but on same line");
         Point point7 = new Point(5,2);
         assertFalse(polygon1.isInside(point7),"Point is outside ");
+
+        Polygon polygon2 = new Polygon();
+        polygon2.addPoint(new Point(11.46,17.07));
+        polygon2.addPoint(new Point(8.96,14.15));
+        polygon2.addPoint(new Point(10.6,10.01));
+        polygon2.addPoint(new Point(15.5,19.55));
+        polygon2.addPoint(new Point(7.92,10.15));
+        polygon2.addPoint(new Point(10.36,16.53));
+        polygon2.addPoint(new Point(18.28,10.89));
+        polygon2.addPoint(new Point(13.56,18.77));
+
+        Point point8 = new Point(11.18,12.89);
+        assertTrue(polygon2.isInside(point8),"Point is inside polygon");
+        Point point9 = new Point(10.48,14.64);
+        assertFalse(polygon2.isInside(point9),"Point is outside polygon");
+        Point point10 = new Point(12.99,16.44);
+        assertTrue(polygon2.isInside(point10),"Point is on the edge of polygon");
+        Point point11 = new Point(8.98,15.23);
+        assertFalse(polygon2.isInside(point11),"Point is outside");
+        Point point12 = new Point(9.68,12.33);
+        assertTrue(polygon2.isInside(point12),"Point is on the corner of the polygon");
 
     }
 
