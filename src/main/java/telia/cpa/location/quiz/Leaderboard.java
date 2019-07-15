@@ -28,6 +28,6 @@ public class Leaderboard {
 
 
     public void sort(){
-        Collections.sort(userScores,  );
+        //Collections.sort(userScores,  );
     }
 }

@@ -42,9 +42,6 @@ public class main {
         Point pointOutside = new Point(10.773040955028136, 59.94742674332819);
 
 
-
-        CheckPosition check = new CheckPosition();
-
         //System.out.println("inside: " + check.isInside(storoKjopesenter.getPointsAsArray(), pointInside));
         //System.out.println("outside: " + check.isInside(storoKjopesenter.getPointsAsArray(), pointOutside));
     }

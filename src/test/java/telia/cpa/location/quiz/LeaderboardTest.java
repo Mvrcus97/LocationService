@@ -59,7 +59,7 @@ class LeaderboardTest {
         userScore.setScore(123);
         leaderboard.add(userScore);
 
-        leaderboard.
+        //leaderboard.
     }
 
 }
