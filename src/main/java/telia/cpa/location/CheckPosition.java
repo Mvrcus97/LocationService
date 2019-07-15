@@ -3,7 +3,7 @@ package telia.cpa.location;
 public class CheckPosition {
 
     // n vertices
-    /*boolean isInside(Point polygon[], Point p) {
+    boolean isInside(Point polygon[], Point p) {
 
         if (polygon == null || p == null){
             return false;
@@ -41,6 +41,6 @@ public class CheckPosition {
         //return true if count = odd
         return count % 2 != 0;
 
-    }*/
+    }
 
 }

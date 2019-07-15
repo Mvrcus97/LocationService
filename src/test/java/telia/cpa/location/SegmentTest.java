@@ -105,10 +105,10 @@ class SegmentTest {
         //Segment ray = new Segment(p1, p3);
         //assertTrue(seg.doIntersect(ray),"Ray starting inside segment");
 
-        Point p2 = new Point(1,1);
+        Point p2 = new Point(3,1);
         Point p3 = new Point(9,1);
         Segment ray1 = new Segment(p2, p3);
-        Segment seg = new Segment(new Point(3,1), new Point(7,1));
+        Segment seg = new Segment(new Point(5,1), new Point(7,1));
         assertFalse(seg.doIntersect(ray1), "Ray staring before segment");
 
 

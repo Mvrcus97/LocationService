@@ -82,18 +82,12 @@ public class Segment {
         if (o1 != o2 && o3 != o4) return true;
 
         //special case
-        /*if ( o1 + o2 + o3 + o4 == 0) {
-            if(onSegment(other.a)) return true;
-        }*/
-
         if (o1 == 0 && onSegment(other.a)) return true;
 
         if (o2 == 0 && onSegment(other.b)) return true;
 
-        if (o3 == 0 && other.onSegment(a)) return true;
-
+        //if (o3 == 0 && other.onSegment(a)) return true;
         //if (o4 == 0 && other.onSegment(b)) return true;
-
 
         return false;
     }
