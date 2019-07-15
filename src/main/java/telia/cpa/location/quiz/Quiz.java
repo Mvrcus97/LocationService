@@ -1,6 +1,6 @@
 package telia.cpa.location.quiz;
 
-import javafx.collections.transformation.SortedList;
+/*import javafx.collections.transformation.SortedList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,3 +52,4 @@ public class Quiz {
 
 
 }// end Quiz
+*/

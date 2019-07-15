@@ -84,4 +84,50 @@ public class Polygon {
     }
 
 
+    boolean isInside(Point p) {
+
+        if (points == null || p == null){
+            return false;
+        }
+
+        int n = size();
+        if (n < 3) return false;
+
+        Point extreme = new Point(Double.POSITIVE_INFINITY, p.y);
+        Segment ray = new Segment(p, extreme);
+
+        if (p.x < minX || p.x > maxX ||
+            p.y < minY || p.y > maxY) {
+            return false;
+        }
+
+        for (int i = 0; i < points.size(); i++){
+            if (points.get(i) == p){
+                return true;
+            }
+        }
+
+        int count = 0;
+        int i = 0;
+
+        do {
+            int next = (i + 1) % n;
+
+            Segment seg = new Segment(points.get(i), points.get(next));
+            if (seg.doIntersect(ray)) {
+
+                // if point p is colinear with i-next, then check if it lies on i-next
+                if (seg.orientation(p) == 0) {
+                    return seg.onSegment(p);
+                }
+                count++;
+            }
+            i = next;
+        } while (i != 0);
+
+        //return true if count = odd
+        return count % 2 != 0;
+
+    }
+
 }//end Polygon
