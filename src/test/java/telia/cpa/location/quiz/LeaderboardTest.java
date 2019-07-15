@@ -39,8 +39,27 @@ class LeaderboardTest {
 
     @Test
     void testSortedOutput() {
+        User user = new User("4746443716");
+        UserScore userScore = new UserScore(user);
+        userScore.setScore(256);
+        leaderboard.add(userScore);
 
+        user = new User("911");
+        userScore = new UserScore(user);
+        userScore.setScore(125);
+        leaderboard.add(userScore);
 
+        user = new User("110");
+        userScore = new UserScore(user);
+        userScore.setScore(253);
+        leaderboard.add(userScore);
+
+        user = new User("112");
+        userScore = new UserScore(user);
+        userScore.setScore(123);
+        leaderboard.add(userScore);
+
+        leaderboard.
     }
 
 }

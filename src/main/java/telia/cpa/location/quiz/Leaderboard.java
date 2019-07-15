@@ -1,6 +1,7 @@
 package telia.cpa.location.quiz;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Leaderboard {
@@ -23,5 +24,10 @@ public class Leaderboard {
 
     public List<UserScore> getUserScores() {
         return this.userScores;
+    }
+
+
+    public void sort(){
+        Collections.sort(userScores,  );
     }
 }
