@@ -84,6 +84,13 @@ public class CoverageAreaInvoker {
         return location;
     }
 
+    public Point getPoint(){
+        updateResult();
+        Point point = new Point(Double.parseDouble(result.getLatitude()),
+                Double.parseDouble(result.getLongitude()));
+        return point;
+    }
+
     public String getCountry(){
             updateResult();
             return result.getCountry();

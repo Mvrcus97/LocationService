@@ -25,7 +25,9 @@ public class UpdatePosition {
 
             Scheduler scheduler1 = new StdSchedulerFactory().getScheduler();
             scheduler1.start();
-           scheduler1.scheduleJob(job1, trigger1);
+            scheduler1.scheduleJob(job1, trigger1);
+
+
 
 
 
