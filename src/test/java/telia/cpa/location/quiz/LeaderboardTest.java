@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import telia.cpa.location.*;
+import telia.cpa.location.quiz.*;
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,16 +23,14 @@ class LeaderboardTest {
     @Test
     void testInsertion() {
         User user = new User("4746443715");
-        UserScore userScore = new UserScore(user);
-        leaderboard.add(userScore);
+        leaderboard.add(user);
         assertNotNull(leaderboard.getUserScores());
-        assertTrue(leaderboard.getUserScores().contains(userScore));
+        assertTrue(leaderboard.getUserScores().contains(user));
     }
 
     @Test
     void testNullInsertion() {
         User user = new User("4746443715");
-        UserScore userScore = new UserScore(user);
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             leaderboard.add(null);
         });
@@ -41,40 +41,34 @@ class LeaderboardTest {
     @Test
     void testSortedOutput() {
         User user = new User("4746443716");
-        UserScore userScore = new UserScore(user);
-        userScore.setScore(256);
-        leaderboard.add(userScore);
+        user.setScore(256);
+        leaderboard.add(user);
 
         user = new User("911");
-        userScore = new UserScore(user);
-        userScore.setScore(125);
-        leaderboard.add(userScore);
+        user.setScore(15);
+        leaderboard.add(user);
 
         user = new User("110");
-        userScore = new UserScore(user);
-        userScore.setScore(253);
-        leaderboard.add(userScore);
+        user.setScore(253);
+        leaderboard.add(user);
 
         user = new User("112");
-        userScore = new UserScore(user);
-        userScore.setScore(123);
-        leaderboard.add(userScore);
+        user.setScore(123);
+        leaderboard.add(user);
 
         user = new User("123");
-        userScore = new UserScore(user);
-        userScore.setScore(231);
-        leaderboard.add(userScore);
+        user.setScore(231);
+        leaderboard.add(user);
 
         user = new User("113");
-        userScore = new UserScore(user);
-        userScore.setScore(253);
-        leaderboard.add(userScore);
+        user.setScore(253);
+        leaderboard.add(user);
 
         leaderboard.sort();
 
         int prev = 10000;
-        List<UserScore> list = leaderboard.getUserScores();
-        for(UserScore s : list){
+        List<User> list = leaderboard.getUserScores();
+        for(User s : list){
             assertTrue(s.getScore() <= prev,s.getScore() + "larger than: " + prev);
             prev = s.getScore();
         }

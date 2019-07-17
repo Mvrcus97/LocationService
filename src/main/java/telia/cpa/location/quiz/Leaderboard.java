@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Leaderboard {
-    ArrayList<UserScore> userScores;
+    ArrayList<User> userScores;
 
 
 
@@ -16,7 +16,7 @@ public class Leaderboard {
     }
 
 
-    public void add(UserScore userScore) {
+    public void add(User userScore) {
         if(userScore == null){
             throw new IllegalArgumentException("You cannot insert null into Leaderboard.");
         }
@@ -24,7 +24,7 @@ public class Leaderboard {
         sort();
     }
 
-    public List<UserScore> getUserScores() {
+    public List<User> getUserScores() {
         return this.userScores;
     }
 
@@ -34,13 +34,13 @@ public class Leaderboard {
     }
 
     //get top N UserScores.
-    public List<UserScore> getTopN(int n){
+    public List<User> getTopN(int n){
         if( n > userScores.size()){
             return userScores;
         }
 
 
-        ArrayList<UserScore> top = new ArrayList<>();
+        ArrayList<User> top = new ArrayList<>();
         for(int i = 0; i < n; i++){
             top.add(i, userScores.get(i));
         }

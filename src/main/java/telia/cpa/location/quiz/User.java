@@ -5,10 +5,12 @@ public class User {
     String firstName;
     String lastName;
     String userName;
+    int score;
 
 
     public User(String msisdn){
         this.msisdn = msisdn;
+        this.score = 0;
     }
 
     public void setFirstName(String firstName) {
@@ -34,9 +36,14 @@ public class User {
     public void setUserName(String userName){
         this.userName = userName;
     }
-    public String getUserName(){
-        return this.userName;
+    public String getUserName(){ return this.userName; }
+
+    public void setScore(int score) { this.score = score; }
+    public void updateScore(int extra){this.score += extra;}
+    public int getScore() {
+        return score;
     }
+
 
 
 

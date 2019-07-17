@@ -63,6 +63,7 @@ public class Polygon {
         WKT = WKT.replaceAll("[))]", "");
 
         Scanner scanner = new Scanner(WKT);
+        Point p;
         int pair_pos = 0;
         double[] pair = new double[2];
         while (scanner.hasNext()){
@@ -71,8 +72,10 @@ public class Polygon {
                 //System.out.println("Found: " + pair[pair_pos]);
                 pair_pos ++;
                 if(pair_pos == 2){
-                    points.add( new Point(pair[0], pair[1]));
-                    System.out.println("New pair: "+ pair[0] + ", " + pair[1]);
+                    p = new Point(pair[1], pair[0]);
+                    points.add(p);
+                    updateMinMax(p);
+                   // System.out.println("New pair: "+ pair[1] + ", " + pair[0]);
                     pair_pos = 0;
                 }
             }
@@ -84,7 +87,7 @@ public class Polygon {
     }
 
 
-    boolean isInside(Point p) {
+    public boolean isInside(Point p) {
 
         if (points == null || p == null){
             return false;

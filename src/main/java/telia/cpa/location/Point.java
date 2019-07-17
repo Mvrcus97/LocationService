@@ -1,6 +1,6 @@
 package telia.cpa.location;
 
-class Point {
+public class Point {
 
     final double x;
     final double y;

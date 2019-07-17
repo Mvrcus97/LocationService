@@ -154,7 +154,7 @@ public class CoverageAreaInvoker {
                 //System.out.println("Found: " + pair[pair_pos%2]);
                 pair_pos ++;
                 if(pair_pos == 2){
-                    points[idx++] = new Point(pair[0], pair[1]);
+                    points[idx++] = new Point(pair[1], pair[0]);
                     //System.out.println("New pair: "+ pair[1] + ", " + pair[0]);
                     pair_pos = 0;
                 }
