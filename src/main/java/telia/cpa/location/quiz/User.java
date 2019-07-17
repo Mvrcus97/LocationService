@@ -6,11 +6,17 @@ public class User {
     String lastName;
     String userName;
     int score;
+    int level;
 
 
     public User(String msisdn){
         this.msisdn = msisdn;
         this.score = 0;
+        this.level = 0;
+    }
+
+    public String getMsisdn() {
+        return msisdn;
     }
 
     public void setFirstName(String firstName) {
@@ -44,7 +50,13 @@ public class User {
         return score;
     }
 
+    public int getLevel(){
+        return this.level;
+    }
 
+    public void updateLevel(){
+        this.level +=1;
+    }
 
 
 }
