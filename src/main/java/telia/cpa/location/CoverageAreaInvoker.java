@@ -86,8 +86,12 @@ public class CoverageAreaInvoker {
 
     public Point getPoint(){
         updateResult();
-        Point point = new Point(Double.parseDouble(result.getLatitude()),
-                Double.parseDouble(result.getLongitude()));
+        String x_s = result.getLatitude().replaceAll(",",".");
+        String y_s = result.getLongitude().replaceAll(",",".");
+
+        double x = Double.valueOf(x_s);
+        double y = Double.valueOf(y_s);
+        Point point = new Point(x, y);
         return point;
     }
 

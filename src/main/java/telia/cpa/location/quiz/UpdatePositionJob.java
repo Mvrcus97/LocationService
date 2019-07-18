@@ -14,16 +14,12 @@ import telia.cpa.location.CoverageAreaInvoker;
 
 public class UpdatePositionJob implements Job{
     CoverageAreaInvoker client = new CoverageAreaInvoker();
-    ArrayList<String> numberList = new ArrayList<String>();
+    ArrayList<User> memberList;
+    ArrayList<QuizLocation> quizLocations;
 
-    public void setList(ArrayList<String> list){
-        this.numberList = list;
-    }
 
     public void execute(JobExecutionContext context) throws JobExecutionException {
         System.out.println("CronJob --->>> Hello! Time is " + new Date());
-        numberList.add("4740553014");
-        numberList.add("4745675796");
 
         SchedulerContext schedulerContext = null;
         try {
@@ -31,12 +27,11 @@ public class UpdatePositionJob implements Job{
         } catch (SchedulerException e1) {
             e1.printStackTrace();
         }
-       ArrayList<User> memberList = (ArrayList<User>) schedulerContext.get("memberList");
+        this.memberList = (ArrayList<User>) schedulerContext.get("memberList");
+        this.quizLocations = (ArrayList<QuizLocation>) schedulerContext.get("quizLocations");
 
         System.out.println("List we found: ");
-        for( User u : memberList){
-            System.out.println(u.getMsisdn());
-        }
+        checkMemberList();
 
        /* for(String nr : numberList){
             System.out.println("Current number lookup: " + nr );
@@ -47,14 +42,15 @@ public class UpdatePositionJob implements Job{
         System.out.println("All numbers located.");
     }
 
-    public void checkMemberList(Quiz quiz){
+    public void checkMemberList(){
 
         Point point;
         Polygon polygon;
-        for (User user : quiz.memberList){
+        for (User user : memberList ){
             client.setMsisdn(user.getMsisdn());
             point = client.getPoint();
-            polygon = quiz.getLevel(user);
+            System.out.println(client.getLocation());
+            polygon = quizLocations.get(user.getLevel()).getPolygon();
 
             if (polygon.isInside(point)){
                 updateUser(user);
@@ -66,6 +62,8 @@ public class UpdatePositionJob implements Job{
     public void updateUser(User user){
         user.updateLevel();
         user.updateScore(scoreCalc()); //can be replaced with scoreCalc
+        System.out.println(user.getMsisdn() + " Level up! - "+ user.getLevel());
+
     }
 
     public int scoreCalc(){

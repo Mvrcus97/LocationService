@@ -2,6 +2,7 @@ package telia.cpa.location.quiz;
 
 import telia.cpa.location.Polygon;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,9 @@ public class Quiz {
     public QuizLocation getQuizLocation(int index) {
         return locations.get(index);
     }
+    public ArrayList<QuizLocation> getQuizLocations(){
+        return this.locations;
+    }
 
     public void addMember(User user){
         memberList.add(user);
@@ -30,6 +34,10 @@ public class Quiz {
 
     public void setMemberList(ArrayList<User> memberList){
         this.memberList = memberList;
+    }
+
+    public ArrayList<User> getMemberList(){
+        return this.memberList;
     }
 
     public List <User> getLeaderboard(){
@@ -40,7 +48,7 @@ public class Quiz {
         return leaderboard.getTopN(n);
     }
 
-    public void addUser(User user){
+    public void addToLeaderboard(User user){
         leaderboard.add(user);
     }
 
