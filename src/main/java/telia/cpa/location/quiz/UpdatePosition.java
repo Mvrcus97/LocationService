@@ -8,8 +8,10 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-
+import static org.quartz.JobBuilder.*;
+import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 
 public class UpdatePosition {
     public static void main(String[] args) {
@@ -20,10 +22,22 @@ public class UpdatePosition {
 
             Trigger trigger1 = TriggerBuilder.newTrigger()
                     .withIdentity("cronTrigger1", "group1")
-                    .withSchedule(CronScheduleBuilder.cronSchedule("0/5 * * * * ?"))
+                    .startNow()
+                    .withSchedule(simpleSchedule()
+                            .withIntervalInSeconds(30)
+                            .repeatForever())
                     .build();
 
             Scheduler scheduler1 = new StdSchedulerFactory().getScheduler();
+            ArrayList<User> memberList = new ArrayList<>();
+            User user = new User("4740553014");
+            memberList.add(user);
+            user = new User("4747350966");
+            memberList.add(user);
+
+
+
+            scheduler1.getContext().put("memberList", memberList);
             scheduler1.start();
             scheduler1.scheduleJob(job1, trigger1);
 
