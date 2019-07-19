@@ -13,13 +13,30 @@ import telia.cpa.location.CoverageAreaInvoker;
 
 
 public class UpdatePositionJob implements Job{
+
+    private volatile boolean isJobInterrupted = false;
+    private JobKey jobKey = null;
+    private volatile Thread thisThread;
+
     CoverageAreaInvoker client = new CoverageAreaInvoker();
     ArrayList<User> memberList;
     ArrayList<QuizLocation> quizLocations;
 
+    /*@Override
+    public void interrupt() throws UnableToInterruptJobException {
+        System.err.println("calling interrupt: " + thisThread + " ==> " + jobKey);
+        isJobInterrupted = true;
+        if (thisThread != null){
+            thisThread.interrupt();
+        }
+    }*/
 
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        System.out.println("CronJob --->>> Hello! Time is " + new Date());
+
+        thisThread = Thread.currentThread();
+        jobKey = context.getJobDetail().getKey();
+
+        System.out.println("SimpleJob --->>> Hello! Time is " + new Date());
 
         SchedulerContext schedulerContext = null;
         try {
@@ -33,12 +50,6 @@ public class UpdatePositionJob implements Job{
         System.out.println("List we found: ");
         checkMemberList();
 
-       /* for(String nr : numberList){
-            System.out.println("Current number lookup: " + nr );
-            client.setMsisdn(nr);
-            System.out.println(client.toString());
-        }*/
-
         System.out.println("All numbers located.");
     }
 
@@ -46,6 +57,7 @@ public class UpdatePositionJob implements Job{
 
         Point point;
         Polygon polygon;
+        System.out.println("Size: " + memberList.size());
         for (User user : memberList ){
             client.setMsisdn(user.getMsisdn());
             point = client.getPoint();
@@ -53,7 +65,10 @@ public class UpdatePositionJob implements Job{
             polygon = quizLocations.get(user.getLevel()).getPolygon();
 
             if (polygon.isInside(point)){
+                System.out.println("LEVEL UP");
                 updateUser(user);
+            } else {
+                System.out.println("DID NOT LEVEL UP");
             }
         }
 

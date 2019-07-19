@@ -7,11 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Quiz {
+
     private ArrayList<QuizLocation> locations;
     public ArrayList<User> memberList;
     private Leaderboard leaderboard;
+    UpdatePosition updatePosition;
 
     public Quiz(){
+        //memberList.add(user);
+        //leaderboard.add(user);
         this.locations = new ArrayList<>();
         this.memberList = new ArrayList<>();
         this.leaderboard = new Leaderboard();
@@ -30,6 +34,11 @@ public class Quiz {
 
     public void addMember(User user){
         memberList.add(user);
+        if(this.updatePosition != null) {
+            this.updatePosition.stop();
+        }
+        // member to memberList
+        this.updatePosition = new UpdatePosition(5, memberList, locations);
     }
 
     public void setMemberList(ArrayList<User> memberList){
@@ -55,6 +64,7 @@ public class Quiz {
     public Polygon getLevel(User user){
         return locations.get(user.getLevel()).getPolygon();
     }
+
 
 
 }// end Quiz
