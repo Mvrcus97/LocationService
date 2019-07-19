@@ -49,7 +49,7 @@ public interface CoverageAreaService {
      */
     @WebMethod(operationName = "Placename", action = "http://differitas.no/2015/10/coveragearea/CoverageAreaService/Placename")
     @WebResult(name = "PlacenameRsp", targetNamespace = "http://differitas.no/2015/10/coveragearea", partName = "parameters")
-    public PlacenameRsp placename(
+    public PlacenameRsp coverageplacename(
         @WebParam(name = "PlacenameReq", targetNamespace = "http://differitas.no/2015/10/coveragearea", partName = "parameters")
         PlacenameReq parameters)
         throws ServerFaultMessage, ValidationFaultMessage

@@ -24,8 +24,8 @@ public class CoverageAreaInvoker {
         this.service =  new CoverageAreaService_Service();
         this.port = service.getCoverageAreaServicePort();
         this.request = new CoverageAreaReq();
-        request.setUsername("Summer Intern Test");
-        request.setRef("Nydalen");
+        request.setUsername("Summer Intern Tes");
+        request.setRef("Nydaln");
         lastCalled = -10;
         System.out.println("Client Successfully Created\n ");
     }
@@ -53,6 +53,7 @@ public class CoverageAreaInvoker {
                     System.out.println("Updating Result...");
                     this.result = port.coverage(request);
                     this.lastCalled = System.currentTimeMillis();
+                    System.out.println("After update");
                 } catch (Exception e){System.out.println("UpdateResult error: ");}
         }
         if(result == null){
@@ -60,7 +61,7 @@ public class CoverageAreaInvoker {
             return;
         }
         if(result.getStatus().getCode() != 200){
-            System.out.println("Response error: " + result.getStatus().getValue());
+            System.out.println("Response error HTTP code: " + result.getStatus().getCode() + " value: " + result.getStatus().getValue());
         }
 
     }

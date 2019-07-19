@@ -15,8 +15,13 @@ import static org.quartz.JobBuilder.*;
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 
 public class UpdatePosition {
-    public static void main(String[] args) {
+
+    Scheduler scheduler1;
+
+    public UpdatePosition(int sec, ArrayList<User> memberList, ArrayList<QuizLocation> locations){
         try {
+
+            Thread.sleep(sec*1000);
 
             JobDetail job1 = JobBuilder.newJob(UpdatePositionJob.class)
                     .withIdentity("job1", "group1").build();
@@ -25,49 +30,32 @@ public class UpdatePosition {
                     .withIdentity("cronTrigger1", "group1")
                     .startNow()
                     .withSchedule(simpleSchedule()
-                            .withIntervalInSeconds(15)
+                            .withIntervalInSeconds(sec)
                             .repeatForever())
-                    .build();
+                        .build();
 
-            Scheduler scheduler1 = new StdSchedulerFactory().getScheduler();
-
-            ArrayList<User> memberList = new ArrayList<>();
-
-
-
-            Quiz quiz = new Quiz();
-            Polygon telia = new Polygon();
-            telia.createPolygonFromWKT("POLYGON ((10.76729569807776 59.95319251881604,10.764195064456544 59.952956149672424,10.765171388537965 59.95107050818612,10.76903376951941 59.951666833759084,10.76729569807776 59.95319251881604))");
-            QuizLocation quizLocation = new QuizLocation(telia, "Et fint brunt bygg");
-            quiz.addQuizLocation(quizLocation);
-            quiz.addQuizLocation(quizLocation);
-            quiz.addQuizLocation(quizLocation);
-
-            User user = new User("4747351212");
-            quiz.addMember(user);
-            user = new User("4747350966");
-            quiz.addMember(user);
-
-            memberList = quiz.getMemberList();
-
-
-
+            scheduler1 = new StdSchedulerFactory().getScheduler();
 
             scheduler1.getContext().put("memberList", memberList);
-            scheduler1.getContext().put("quizLocations",quiz.getQuizLocations());
-
+            scheduler1.getContext().put("quizLocations",locations);
 
             scheduler1.start();
             scheduler1.scheduleJob(job1, trigger1);
-
+            //scheduler1.shutdown();
 
             System.out.println("Keep running?");
-
-
-
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    public void stop() {
+        try {
+            this.scheduler1.shutdown();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }
