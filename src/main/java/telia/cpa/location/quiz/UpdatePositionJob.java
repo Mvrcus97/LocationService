@@ -3,20 +3,28 @@ package telia.cpa.location.quiz;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 
 import org.quartz.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import telia.cpa.location.Point;
 import telia.cpa.location.Polygon;
 
 import no.differitas._2015._10.coveragearea.CoverageAreaService;
 import telia.cpa.location.CoverageAreaInvoker;
+import telia.cpa.location.main;
 
 
 public class UpdatePositionJob implements Job{
 
+    final static Logger logger = LoggerFactory.getLogger(main.class);
+
     private volatile boolean isJobInterrupted = false;
     private JobKey jobKey = null;
     private volatile Thread thisThread;
+    CyclicBarrier barrier;
 
     CoverageAreaInvoker client = new CoverageAreaInvoker();
     ArrayList<User> memberList;
@@ -35,8 +43,9 @@ public class UpdatePositionJob implements Job{
 
         thisThread = Thread.currentThread();
         jobKey = context.getJobDetail().getKey();
+        barrier = new CyclicBarrier(4); // 3 workers + master
 
-        System.out.println("SimpleJob --->>> Hello! Time is " + new Date());
+        System.out.println("\n\n-----JOB STARTED-------");
 
         SchedulerContext schedulerContext = null;
         try {
@@ -46,11 +55,13 @@ public class UpdatePositionJob implements Job{
         }
         this.memberList = (ArrayList<User>) schedulerContext.get("memberList");
         this.quizLocations = (ArrayList<QuizLocation>) schedulerContext.get("quizLocations");
+        //System.out.println("Current memberlist inside job: " + memberList.size());
 
-        System.out.println("List we found: ");
         checkMemberList();
 
-        System.out.println("All numbers located.");
+
+        //System.out.println("All numbers located.");
+        System.out.println("-----JOB DONE-----");
     }
 
     public void checkMemberList(){
@@ -61,18 +72,19 @@ public class UpdatePositionJob implements Job{
         for (User user : memberList ){
             client.setMsisdn(user.getMsisdn());
             point = client.getPoint();
-            System.out.println(client.getLocation());
+            logger.info("Location of " + user.getFirstName() + " is: " + client.getLocation());
             polygon = quizLocations.get(user.getLevel()).getPolygon();
 
             if (polygon.isInside(point)){
-                System.out.println("LEVEL UP");
+                logger.info(user.getMsisdn() + " Level up!!!! -  "+ user.getLevel());
                 updateUser(user);
             } else {
-                System.out.println("DID NOT LEVEL UP");
+               // System.out.println("DID NOT LEVEL UP");
             }
         }
 
     }
+
 
     public void updateUser(User user){
         user.updateLevel();

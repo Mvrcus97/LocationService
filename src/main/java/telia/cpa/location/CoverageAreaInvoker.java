@@ -27,7 +27,7 @@ public class CoverageAreaInvoker {
         request.setUsername("Summer Intern Tes");
         request.setRef("Nydaln");
         lastCalled = -10;
-        System.out.println("Client Successfully Created\n ");
+        //System.out.println("Client Successfully Created\n ");
     }
 
     public CoverageAreaInvoker(String nr){
@@ -51,9 +51,10 @@ public class CoverageAreaInvoker {
         if(System.currentTimeMillis() - lastCalled > 10000){
             try{
                     System.out.println("Updating Result...");
+                    long start = System.nanoTime();
                     this.result = port.coverage(request);
+                    System.out.println("Response time: " + (System.nanoTime() - start)/1000000 + "ms");
                     this.lastCalled = System.currentTimeMillis();
-                    System.out.println("After update");
                 } catch (Exception e){System.out.println("UpdateResult error: ");}
         }
         if(result == null){

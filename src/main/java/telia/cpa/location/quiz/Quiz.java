@@ -14,8 +14,6 @@ public class Quiz {
     UpdatePosition updatePosition;
 
     public Quiz(){
-        //memberList.add(user);
-        //leaderboard.add(user);
         this.locations = new ArrayList<>();
         this.memberList = new ArrayList<>();
         this.leaderboard = new Leaderboard();
@@ -35,10 +33,11 @@ public class Quiz {
     public void addMember(User user){
         memberList.add(user);
         if(this.updatePosition != null) {
+            //kill QuartzJob
             this.updatePosition.stop();
         }
         // member to memberList
-        this.updatePosition = new UpdatePosition(5, memberList, locations);
+        this.updatePosition = new UpdatePosition(20, memberList, locations);
     }
 
     public void setMemberList(ArrayList<User> memberList){

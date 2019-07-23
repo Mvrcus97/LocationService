@@ -17,10 +17,16 @@ import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 public class UpdatePosition {
 
     Scheduler scheduler1;
+    ArrayList<User> memberList;
+    ArrayList<QuizLocation> locations;
+
+
 
     public UpdatePosition(int sec, ArrayList<User> memberList, ArrayList<QuizLocation> locations){
-        try {
+        this.memberList = memberList;
+        this.locations = locations;
 
+        try {
             Thread.sleep(sec*1000);
 
             JobDetail job1 = JobBuilder.newJob(UpdatePositionJob.class)
@@ -32,7 +38,7 @@ public class UpdatePosition {
                     .withSchedule(simpleSchedule()
                             .withIntervalInSeconds(sec)
                             .repeatForever())
-                        .build();
+                    .build();
 
             scheduler1 = new StdSchedulerFactory().getScheduler();
 
@@ -43,12 +49,12 @@ public class UpdatePosition {
             scheduler1.scheduleJob(job1, trigger1);
             //scheduler1.shutdown();
 
-            System.out.println("Keep running?");
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }//end updatePosition
+
+
 
     public void stop() {
         try {

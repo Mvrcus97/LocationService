@@ -6,9 +6,12 @@ import telia.cpa.location.quiz.UpdatePosition;
 import telia.cpa.location.quiz.User;
 
 import java.util.ArrayList;
-
+import org.slf4j.*;
 
 public class main {
+
+    final static Logger logger = LoggerFactory.getLogger(main.class);
+
     public static void main(String[] args) {
 
         Quiz quiz = new Quiz();
@@ -26,26 +29,38 @@ public class main {
         quiz.addQuizLocation(teliaBygg);
 
         User user = new User("4740553014");
+        user.setFirstName("Telia SimCard");
         quiz.addMember(user);
-
+        /*
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+         */
+
         user = new User("4790519192");
+        user.setFirstName("Per Anders");
         System.out.println("ADDING NEW MEMBER");
         quiz.addMember(user);
 
+        /*
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
 
         user = new User("4798679661");
+        user.setFirstName("Patience");
         System.out.println("ADDING NEW MEMBER!!!!!!");
+        quiz.addMember(user);
+
+
+        user = new User("4747351212");
+        user.setFirstName("Morra til Shobi");
+        System.out.println("Adding new member.");
         quiz.addMember(user);
 
 
