@@ -28,17 +28,18 @@ public class Quiz {
     public QuizLocation getQuizLocation(int index) {
         return locations.get(index);
     }
+
     public ArrayList<QuizLocation> getQuizLocations(){
         return this.locations;
     }
 
-    public void addMember(User user){
+    public void addMember(User user, int sec){
         memberList.add(user);
         if(this.updatePosition != null) {
             this.updatePosition.stop();
         }
         // member to memberList
-        this.updatePosition = new UpdatePosition(5, memberList, locations);
+        this.updatePosition = new UpdatePosition(sec, memberList, locations);
     }
 
     public void setMemberList(ArrayList<User> memberList){
