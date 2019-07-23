@@ -48,6 +48,7 @@ public class UpdatePositionJob implements Job{
         Polygon margin;
         System.out.println("memberList size: " + memberList.size() + "\n");
 
+        
         for (User user : memberList ){
             client.setMsisdn(user.getMsisdn()); // Update client from API.
             point = client.getPoint();
