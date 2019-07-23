@@ -46,8 +46,10 @@ public class UpdatePosition {
             scheduler1.getContext().put("quizLocations",locations);
 
             scheduler1.start();
+            System.out.println("******************** SCHEDULER STARTED ********************");
             scheduler1.scheduleJob(job1, trigger1);
             //scheduler1.shutdown();
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,7 +60,7 @@ public class UpdatePosition {
 
     public void stop() {
         try {
-            this.scheduler1.shutdown();
+            this.scheduler1.shutdown(false);
         } catch (Exception e){
             e.printStackTrace();
         }

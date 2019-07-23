@@ -7,6 +7,7 @@ public class User {
     String userName;
     int score;
     int level;
+    int marginCount;
 
 
     public User(String msisdn){
@@ -22,15 +23,13 @@ public class User {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getFirstName() {
         return firstName;
     }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
     public String getLastName() {
         return lastName;
     }
@@ -45,18 +44,23 @@ public class User {
     public String getUserName(){ return this.userName; }
 
     public void setScore(int score) { this.score = score; }
-    public void updateScore(int extra){this.score += extra;}
     public int getScore() {
         return score;
     }
+    public void updateScore(int extra){this.score += extra;}
 
     public int getLevel(){
         return this.level;
     }
-
     public void updateLevel(){
         this.level +=1;
     }
+
+    public int getMarginCount() {return this.marginCount; }
+    public void updateMarginCount() { this.marginCount++; }
+    public void resetMarginCount() { this.marginCount = 0; }
+
+
 
 
 }

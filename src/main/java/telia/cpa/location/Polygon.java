@@ -19,6 +19,13 @@ public class Polygon {
         minX = minY = 9999999;
     }
 
+    public Polygon(String WKT){
+        this.points = new ArrayList<>();
+        createPolygonFromWKT(WKT);
+        maxX = maxY = 0;
+        minX = minY = 9999999;
+    }
+
     public Polygon(Point[] points){
         this.points = new ArrayList<>(Arrays.asList(points));
         maxX = maxY = 0;
