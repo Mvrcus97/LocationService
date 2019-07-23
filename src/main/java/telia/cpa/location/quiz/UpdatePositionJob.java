@@ -22,53 +22,56 @@ public class UpdatePositionJob implements Job{
     ArrayList<User> memberList;
     ArrayList<QuizLocation> quizLocations;
 
-    /*@Override
-    public void interrupt() throws UnableToInterruptJobException {
-        System.err.println("calling interrupt: " + thisThread + " ==> " + jobKey);
-        isJobInterrupted = true;
-        if (thisThread != null){
-            thisThread.interrupt();
-        }
-    }*/
 
     public void execute(JobExecutionContext context) throws JobExecutionException {
 
         thisThread = Thread.currentThread();
         jobKey = context.getJobDetail().getKey();
 
-        System.out.println("SimpleJob --->>> Hello! Time is " + new Date());
+        //System.out.println("SimpleJob --->>> Hello! Time is " + new Date());
+        System.out.println("\n --------- JOB STARTED ---------      " + new Date());
 
         SchedulerContext schedulerContext = null;
+
         try {
             schedulerContext = context.getScheduler().getContext();
         } catch (SchedulerException e1) {
             e1.printStackTrace();
         }
+
         this.memberList = (ArrayList<User>) schedulerContext.get("memberList");
         this.quizLocations = (ArrayList<QuizLocation>) schedulerContext.get("quizLocations");
 
-        System.out.println("List we found: ");
         checkMemberList();
 
-        System.out.println("All numbers located.");
+        System.out.println("--------- JOB DONE --------- \n");
     }
 
     public void checkMemberList(){
 
         Point point;
         Polygon polygon;
-        System.out.println("Size: " + memberList.size());
+        Polygon margin;
+        System.out.println("memberList size: " + memberList.size() + "\n");
+
         for (User user : memberList ){
             client.setMsisdn(user.getMsisdn());
             point = client.getPoint();
-            System.out.println(client.getLocation());
             polygon = quizLocations.get(user.getLevel()).getPolygon();
+            margin = quizLocations.get(user.getLevel()).getMargin();
+            System.out.println(user.getFirstName() + " " + client.getLocation());
 
             if (polygon.isInside(point)){
-                System.out.println("LEVEL UP");
+                System.out.println("LEVEL UP \n");
                 updateUser(user);
+            } else if (margin.isInside(point)){
+                user.updateMarginCount();
+                if (user.getMarginCount() >= 5) {
+                    System.out.println("LEVEL UP \n");
+                    updateUser(user);
+                }
             } else {
-                System.out.println("DID NOT LEVEL UP");
+                System.out.println("DID NOT LEVEL UP \n");
             }
         }
 
@@ -77,8 +80,8 @@ public class UpdatePositionJob implements Job{
     public void updateUser(User user){
         user.updateLevel();
         user.updateScore(scoreCalc()); //can be replaced with scoreCalc
+        user.resetMarginCount();
         System.out.println(user.getMsisdn() + " Level up! - "+ user.getLevel());
-
     }
 
     public int scoreCalc(){
