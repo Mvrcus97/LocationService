@@ -17,7 +17,7 @@ import no.differitas._2015._10.coveragearea.CoverageAreaService;
 import telia.cpa.location.CoverageAreaInvoker;
 import telia.cpa.location.main;
 
-
+@DisallowConcurrentExecution
 public class UpdatePositionJob implements Job {
 
     final static Logger logger = LoggerFactory.getLogger(main.class);
