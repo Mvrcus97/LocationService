@@ -38,6 +38,7 @@ public class Quiz {
             try {
                 this.updatePosition.shutdown();
             } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         this.updatePosition = new UpdatePosition(sec, memberList, locations, leaderboard);

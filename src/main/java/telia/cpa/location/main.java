@@ -15,7 +15,7 @@ public class main {
     public static void main(String[] args) {
 
         Quiz quiz = new Quiz();
-        int sec = 40;
+        int sec = 10;
 
         quiz.createTestQuiz();
 

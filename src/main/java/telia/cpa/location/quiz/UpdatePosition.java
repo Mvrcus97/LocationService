@@ -34,7 +34,7 @@ public class UpdatePosition {
             scheduler1 = new StdSchedulerFactory().getScheduler();
             scheduler1.getContext().put("memberList", memberList);
             scheduler1.getContext().put("quizLocations",locations);
-            scheduler1.getContext().put("leaderbaord", leaderboard);
+            scheduler1.getContext().put("leaderboard", leaderboard);
 
             scheduler1.start();
             scheduler1.scheduleJob(job1, trigger1);

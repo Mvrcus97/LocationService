@@ -17,13 +17,14 @@ import no.differitas._2015._10.coveragearea.CoverageAreaService;
 import telia.cpa.location.CoverageAreaInvoker;
 import telia.cpa.location.main;
 
-
+@DisallowConcurrentExecution
 public class UpdatePositionJob implements Job {
 
     final static Logger logger = LoggerFactory.getLogger(main.class);
     CoverageAreaInvoker client = new CoverageAreaInvoker();
     ArrayList<User> memberList;
     ArrayList<QuizLocation> quizLocations;
+    Leaderboard leaderboard;
 
     public void execute(JobExecutionContext context) throws JobExecutionException {
 
@@ -37,10 +38,21 @@ public class UpdatePositionJob implements Job {
             e1.printStackTrace();
         }
 
+        // Get data from Scheduler
         this.memberList = (ArrayList<User>) schedulerContext.get("memberList");
         this.quizLocations = (ArrayList<QuizLocation>) schedulerContext.get("quizLocations");
+        this.leaderboard = (Leaderboard) schedulerContext.get("leaderboard");
 
         checkMemberList();
+
+        List<User> leaderList = leaderboard.getTopN(10);
+        System.out.println("\n----------------LEADERBOARD---------------------");
+        User u;
+        for(int i = 0 ; i < leaderList.size(); i++){
+            u = leaderList.get(i);
+            System.out.println( u.getScore() + " - "  + u.getFirstName());
+        }
+        System.out.println("------------------------------------------------\n");
 
         System.out.println("--------- JOB DONE --------- \n");
 
