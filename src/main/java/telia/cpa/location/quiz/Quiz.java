@@ -40,7 +40,7 @@ public class Quiz {
             } catch (Exception e) {
             }
         }
-        this.updatePosition = new UpdatePosition(sec, memberList, locations);
+        this.updatePosition = new UpdatePosition(sec, memberList, locations, leaderboard);
     }
 
     public void setMemberList(ArrayList<User> memberList){
