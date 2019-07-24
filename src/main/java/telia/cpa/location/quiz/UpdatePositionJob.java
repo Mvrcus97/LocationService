@@ -3,6 +3,8 @@ package telia.cpa.location.quiz;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.quartz.*;
 import org.slf4j.Logger;
@@ -15,16 +17,19 @@ import telia.cpa.location.CoverageAreaInvoker;
 import telia.cpa.location.main;
 
 
-public class UpdatePositionJob implements Job{
+public class UpdatePositionJob implements Job {
+
     final static Logger logger = LoggerFactory.getLogger(main.class);
     CoverageAreaInvoker client = new CoverageAreaInvoker();
     ArrayList<User> memberList;
     ArrayList<QuizLocation> quizLocations;
 
-
     public void execute(JobExecutionContext context) throws JobExecutionException {
+
         System.out.println("\n --------- JOB STARTED ---------      " + new Date());
+
         SchedulerContext schedulerContext = null;
+
         try {
             schedulerContext = context.getScheduler().getContext();
         } catch (SchedulerException e1) {
@@ -35,8 +40,11 @@ public class UpdatePositionJob implements Job{
         this.quizLocations = (ArrayList<QuizLocation>) schedulerContext.get("quizLocations");
 
         checkMemberList();
+
         System.out.println("--------- JOB DONE --------- \n");
-    }//end  execute
+
+    } //execute
+
 
 
     /*   Go through each user in the memberList and update their Level dependent on if they are within their
@@ -48,7 +56,7 @@ public class UpdatePositionJob implements Job{
         Polygon margin;
         System.out.println("memberList size: " + memberList.size());
 
-        
+
         for (User user : memberList ){
             client.setMsisdn(user.getMsisdn()); // Update client from API.
             point = client.getPoint();
@@ -88,5 +96,5 @@ public class UpdatePositionJob implements Job{
         return 10;
     }
 
-}
+ }
 
