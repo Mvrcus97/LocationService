@@ -13,30 +13,29 @@ public class Polygon {
     ArrayList<Point> points;
     double minX, maxX, minY, maxY;
 
-    public Polygon(){
+    /*public Polygon(){
         this.points = new ArrayList<>();
         maxX = maxY = 0;
         minX = minY = 9999999;
-    }
+    }*/
 
     public Polygon(String WKT){
         this.points = new ArrayList<>();
-        createPolygonFromWKT(WKT);
         maxX = maxY = 0;
         minX = minY = 9999999;
+        createPolygonFromWKT(WKT);
     }
 
-    public Polygon(Point[] points){
+   /* public Polygon(Point[] points){
         this.points = new ArrayList<>(Arrays.asList(points));
         maxX = maxY = 0;
         minX = minY = 9999999;
     }
 
-
     public void addPoint(Point p){
         updateMinMax(p);
         points.add(p);
-    }
+    }*/
 
     private void updateMinMax(Point p){
         double x = p.getX();
@@ -48,17 +47,17 @@ public class Polygon {
         if(y < minY) minY = y;
     }
 
-    public ArrayList<Point> getPoints(){return this.points;}
-    public Object[] getPointsAsArray(){return this.points.toArray();}
+    /*public ArrayList<Point> getPoints(){return this.points;}
+    public Object[] getPointsAsArray(){return this.points.toArray();}*/
     public int size(){
         return points.size();
     }
 
 
-    public double getMaxX(){return this.maxX;}
+    /*public double getMaxX(){return this.maxX;}
     public double getMaxY(){return this.maxY;}
     public double getMinX(){return this.minX;}
-    public double getMinY(){return this.minY;}
+    public double getMinY(){return this.minY;}*/
 
     /*
      * Transfrom a polygon string in the Well-Known Text format
@@ -91,6 +90,7 @@ public class Polygon {
             }
         }
         scanner.close();
+
     }
 
 
@@ -106,7 +106,14 @@ public class Polygon {
         Point extreme = new Point(Double.POSITIVE_INFINITY, p.y);
         Segment ray = new Segment(p, extreme);
 
+
         if (p.x < minX || p.x > maxX || p.y < minY || p.y > maxY) {
+            /*System.out.println("MAX/MIN TEST OUTSIDE");
+            System.out.println("MinX: " + minX);
+            System.out.println("MinY: " + minY);
+            System.out.println("MaxX: " + maxX);
+            System.out.println("MaxY: " + maxY + "\n");
+            System.out.println("Point: " + p.x + "," + p.y);*/
             return false;
         }
 
