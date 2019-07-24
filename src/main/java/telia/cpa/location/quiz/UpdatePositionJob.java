@@ -39,8 +39,8 @@ public class UpdatePositionJob implements Job{
     }//end  execute
 
 
-    /*   Go through each user in the memberList and update their Level dependent on if they are within their
-     *
+    /*   Go through each user in the memberList and update their Level
+     *   if they are within their current secret location.
      */
     public void checkMemberList(){
         Point point;
