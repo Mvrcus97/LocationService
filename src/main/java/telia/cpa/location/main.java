@@ -45,6 +45,11 @@ public class main {
         System.out.println("ADDING Patience \n");
         quiz.addMember(user, sec);
 
+        System.out.println("h");
+
     }
+
+
+
 }
 
