@@ -46,7 +46,7 @@ public class UpdatePositionJob implements Job{
         Point point;
         Polygon polygon;
         Polygon margin;
-        System.out.println("memberList size: " + memberList.size() + "\n");
+        System.out.println("memberList size: " + memberList.size());
 
         
         for (User user : memberList ){
@@ -55,19 +55,17 @@ public class UpdatePositionJob implements Job{
             polygon = quizLocations.get(user.getLevel()).getPolygon();
             margin = quizLocations.get(user.getLevel()).getMargin();
 
-            System.out.println("Location of " + user.getFirstName() + " is: " + client.getLocation()+ "\n" +
+            System.out.println("Location of " + user.getFirstName() + " is: " + client.getLocation()+ ".     " +
                     "Next location: " + quizLocations.get(user.getLevel()).getHint());
             logger.info("Location of " + user.getFirstName() + " is: " + client.getLocation()+ "\n" +
-                    "Next location: " + quizLocations.get(user.getLevel()).getHint());
+                    "Next location: " + quizLocations.get(user.getLevel()).getHint() + ".     " +
+                    "Current Level: " + user.getLevel() + ".    Margin Count: " + user.getMarginCount());
 
             if (polygon.isInside(point)){
-                logger.info(user.getMsisdn() + " Level up!!!! -  "+ user.getLevel());
-                System.out.println("LEVEL UP \n");
                 updateUser(user);
             } else if (margin.isInside(point)){
                 user.updateMarginCount();
                 if (user.getMarginCount() >= 5) {
-                    System.out.println("LEVEL UP \n");
                     updateUser(user);
                 }
             } else {
@@ -83,6 +81,7 @@ public class UpdatePositionJob implements Job{
         user.updateScore(scoreCalc()); //can be replaced with scoreCalc
         user.resetMarginCount();
         System.out.println(user.getMsisdn() + " Level up! - "+ user.getLevel());
+        logger.info(user.getMsisdn() + " Level up! -  "+ user.getLevel());
     }
 
     public int scoreCalc(){
