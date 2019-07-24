@@ -15,7 +15,7 @@ public class main {
     public static void main(String[] args) {
 
         Quiz quiz = new Quiz();
-        int sec = 25;
+        int sec = 40;
 
         quiz.createTestQuiz();
 
@@ -42,7 +42,18 @@ public class main {
 
         user = new User("4798679661");
         user.setFirstName("Patience");
-        System.out.println("ADDING Patience \n");
+        System.out.println("ADDING PATIENCE \n");
+        quiz.addMember(user, sec);
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        user = new User("4747351212");
+        user.setFirstName("Mamma");
+        System.out.println("ADDING MAMMA \n");
         quiz.addMember(user, sec);
 
     }

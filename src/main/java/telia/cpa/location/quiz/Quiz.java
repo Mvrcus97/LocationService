@@ -35,7 +35,7 @@ public class Quiz {
         memberList.add(user);
         if(this.updatePosition != null) {
             //kill QuartzJob
-            this.updatePosition.stop();
+            this.updatePosition.shutdown();
         }
         // member to memberList
         this.updatePosition = new UpdatePosition(sec, memberList, locations);
