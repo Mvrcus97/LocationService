@@ -34,10 +34,11 @@ public class Quiz {
     public void addMember(User user, int sec){
         memberList.add(user);
         if(this.updatePosition != null) {
-            //kill QuartzJob
-            this.updatePosition.shutdown();
+            try {
+                this.updatePosition.shutdown();
+            } catch (Exception e) {
+            }
         }
-        // member to memberList
         this.updatePosition = new UpdatePosition(sec, memberList, locations);
     }
 
