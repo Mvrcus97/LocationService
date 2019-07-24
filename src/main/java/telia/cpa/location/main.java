@@ -12,7 +12,7 @@ public class main {
     public static void main(String[] args) {
 
         Quiz quiz = new Quiz();
-        int sec = 15;
+        int sec = 40;
 
         // BUSS STATION
         Polygon buss = new Polygon("POLYGON ((10.768163822998076 59.95144956371486,10.76894971023944 59.95151671726368,10.769172333587676 59.951201094401206,10.768397175182372 59.95104663956474,10.768163822998076 59.95144956371486))");
@@ -58,7 +58,18 @@ public class main {
 
         user = new User("4798679661");
         user.setFirstName("Patience");
-        System.out.println("ADDING Patience \n");
+        System.out.println("ADDING PATIENCE \n");
+        quiz.addMember(user, sec);
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        user = new User("4747351212");
+        user.setFirstName("Mamma");
+        System.out.println("ADDING MAMMA \n");
         quiz.addMember(user, sec);
 
     }

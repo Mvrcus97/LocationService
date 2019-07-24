@@ -3,6 +3,8 @@ package telia.cpa.location.quiz;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.quartz.*;
 import telia.cpa.location.Point;
@@ -12,23 +14,14 @@ import no.differitas._2015._10.coveragearea.CoverageAreaService;
 import telia.cpa.location.CoverageAreaInvoker;
 
 
-public class UpdatePositionJob implements Job{
-
-    private volatile boolean isJobInterrupted = false;
-    private JobKey jobKey = null;
-    private volatile Thread thisThread;
+public class UpdatePositionJob implements Job {
 
     CoverageAreaInvoker client = new CoverageAreaInvoker();
     ArrayList<User> memberList;
     ArrayList<QuizLocation> quizLocations;
 
-
     public void execute(JobExecutionContext context) throws JobExecutionException {
 
-        thisThread = Thread.currentThread();
-        jobKey = context.getJobDetail().getKey();
-
-        //System.out.println("SimpleJob --->>> Hello! Time is " + new Date());
         System.out.println("\n --------- JOB STARTED ---------      " + new Date());
 
         SchedulerContext schedulerContext = null;
@@ -45,7 +38,9 @@ public class UpdatePositionJob implements Job{
         checkMemberList();
 
         System.out.println("--------- JOB DONE --------- \n");
-    }
+
+    } //execute
+
 
     public void checkMemberList(){
 
@@ -88,5 +83,5 @@ public class UpdatePositionJob implements Job{
         return 10;
     }
 
-}
+ }
 

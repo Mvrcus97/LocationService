@@ -26,14 +26,14 @@ public class QuizTest {
         Point positionInside = new Point(59.902480, 10.753627);
         Point positionOutside = new Point(59.904331, 10.750322);
 
-        assertTrue(sorenga.isInside(positionInside));
+       /* assertTrue(sorenga.isInside(positionInside));
         assertTrue(!sorenga.isInside(positionOutside));
         String sorengaHint = "Et moderne område kjent som en badeplass";
         QuizLocation quizLocation = new QuizLocation(sorenga, sorengaHint);
         quiz.addQuizLocation(quizLocation);
 
         quizLocation = quiz.getQuizLocation(0);
-        assertEquals(quizLocation.getHint(), sorengaHint);
+        assertEquals(quizLocation.getHint(), sorengaHint);*/
 
 
 

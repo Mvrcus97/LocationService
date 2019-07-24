@@ -36,9 +36,11 @@ public class Quiz {
     public void addMember(User user, int sec){
         memberList.add(user);
         if(this.updatePosition != null) {
-            this.updatePosition.stop();
+            try {
+                this.updatePosition.shutdown();
+            } catch (Exception e) {
+            }
         }
-        // member to memberList
         this.updatePosition = new UpdatePosition(sec, memberList, locations);
     }
 
@@ -65,7 +67,6 @@ public class Quiz {
     public Polygon getLevel(User user){
         return locations.get(user.getLevel()).getPolygon();
     }
-
 
 
 }// end Quiz
