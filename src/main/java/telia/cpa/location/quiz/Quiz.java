@@ -33,6 +33,7 @@ public class Quiz {
 
     public void addMember(User user, int sec){
         memberList.add(user);
+        leaderboard.add(user);
         if(this.updatePosition != null) {
             try {
                 this.updatePosition.shutdown();

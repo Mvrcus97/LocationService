@@ -12,7 +12,7 @@ public class UpdatePosition {
 
     Scheduler scheduler1;
 
-    public UpdatePosition(int sec, ArrayList<User> memberList, ArrayList<QuizLocation> locations){
+    public UpdatePosition(int sec, ArrayList<User> memberList, ArrayList<QuizLocation> locations, Leaderboard leaderboard){
 
         try {
 
@@ -34,6 +34,7 @@ public class UpdatePosition {
             scheduler1 = new StdSchedulerFactory().getScheduler();
             scheduler1.getContext().put("memberList", memberList);
             scheduler1.getContext().put("quizLocations",locations);
+            scheduler1.getContext().put("leaderbaord", leaderboard);
 
             scheduler1.start();
             scheduler1.scheduleJob(job1, trigger1);
