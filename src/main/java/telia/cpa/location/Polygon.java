@@ -108,12 +108,6 @@ public class Polygon {
 
 
         if (p.x < minX || p.x > maxX || p.y < minY || p.y > maxY) {
-            /*System.out.println("MAX/MIN TEST OUTSIDE");
-            System.out.println("MinX: " + minX);
-            System.out.println("MinY: " + minY);
-            System.out.println("MaxX: " + maxX);
-            System.out.println("MaxY: " + maxY + "\n");
-            System.out.println("Point: " + p.x + "," + p.y);*/
             return false;
         }
 

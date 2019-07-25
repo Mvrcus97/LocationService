@@ -11,12 +11,12 @@ import org.slf4j.*;
 
 public class main {
 
-    //final static Logger logger = LoggerFactory.getLogger(main.class);
+    final static Logger logger = LoggerFactory.getLogger(main.class);
 
     public static void main(String[] args) {
 
-        Quiz quiz = new Quiz();
-        int sec = 10;
+       Quiz quiz = new Quiz();
+        int sec = 11;
 
         quiz.createTestQuiz();
 
@@ -34,7 +34,7 @@ public class main {
         user.setFirstName("Patience");
         System.out.println("ADDING Patience \n");
         quiz.addMember(user, sec);
-        
+
 
             try {
                 Thread.sleep(3000);
