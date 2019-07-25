@@ -100,15 +100,13 @@ public class UpdatePositionJob implements Job {
 
     public void updateUser(User user){
         user.updateLevel();
-        user.updateScore(scoreCalc()); //can be replaced with scoreCalc
+        user.updateScore();
         user.resetMarginCount();
         System.out.println(user.getMsisdn() + " Level up! - "+ user.getLevel() + " 🏋️‍ ");
         logger.info(user.getMsisdn() + " Level up! -  "+ user.getLevel());
     }
 
-    public int scoreCalc(){
-        return 10;
-    }
+
 
  }
 
