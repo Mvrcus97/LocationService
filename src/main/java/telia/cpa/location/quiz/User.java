@@ -55,6 +55,7 @@ public class User {
     public void updateLevel(){
         this.level +=1;
     }
+    public void resetLevel() { this.level = 0; }
 
     public int getMarginCount() {return this.marginCount; }
     public void updateMarginCount() { this.marginCount++; }
