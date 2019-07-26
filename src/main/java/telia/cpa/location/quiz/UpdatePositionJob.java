@@ -87,7 +87,8 @@ public class UpdatePositionJob implements Job {
                 updateUser(user);
             } else if (margin.isInside(point)){
                 user.updateMarginCount();
-                if (user.getMarginCount() >= 5) {
+                System.out.println("marginCount: " + user.getMarginCount());
+                if (user.getMarginCount() >= 4) {
                     updateUser(user);
                 }
             } else {
