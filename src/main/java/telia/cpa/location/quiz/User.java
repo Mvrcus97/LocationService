@@ -68,6 +68,7 @@ public class User {
         updateScore();
         this.timeLastFound = System.currentTimeMillis();
     }
+    public void resetLevel() { this.level = 0; }
 
     public int getMarginCount() {return this.marginCount; }
     public void updateMarginCount() { this.marginCount++; }

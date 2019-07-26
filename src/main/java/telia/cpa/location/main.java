@@ -1,5 +1,6 @@
 package telia.cpa.location;
 
+import no.differitas._2006._09.messaging.sms.SmsInvoker;
 import org.quartz.Scheduler;
 import telia.cpa.location.quiz.Quiz;
 import telia.cpa.location.quiz.QuizLocation;
@@ -15,7 +16,8 @@ public class main {
 
     public static void main(String[] args) {
 
-       Quiz quiz = new Quiz();
+
+       /*Quiz quiz = new Quiz();
         int sec = 11;
 
         quiz.createTestQuiz();
@@ -30,11 +32,10 @@ public class main {
                 e.printStackTrace();
             }
 
-        user = new User("4798679661");
-        user.setFirstName("Patience");
-        System.out.println("ADDING Patience \n");
+        user = new User("4740604325");
+        user.setFirstName("Marcus");
+        System.out.println("ADDING MARCUS \n");
         quiz.addMember(user, sec);
-
 
             try {
                 Thread.sleep(3000);
@@ -42,10 +43,15 @@ public class main {
                 e.printStackTrace();
             }
 
-        user = new User("4790519192");
+        user = new User("4798679661");
+        user.setFirstName("Patience");
+        System.out.println("ADDING Patience \n");
+        quiz.addMember(user, sec);
+
+        /*user = new User("4790519192");
         user.setFirstName("Per Anders");
         System.out.println("ADDING PER ANDERS \n");
-        quiz.addMember(user, sec);
+        quiz.addMember(user, sec);*/
 
     }
 }

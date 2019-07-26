@@ -44,6 +44,7 @@ public class UpdatePositionJob implements Job {
         this.leaderboard = (Leaderboard) schedulerContext.get("leaderboard");
 
         checkMemberList();
+        leaderboard.sort();
 
         List<User> leaderList = leaderboard.getTopN(10);
         System.out.println("\n----------------LEADERBOARD---------------------");
@@ -59,8 +60,6 @@ public class UpdatePositionJob implements Job {
     } //execute
 
 
-
-
     /*   Go through each user in the memberList and update their Level
      *   if they are within their current secret location.
      */
@@ -72,6 +71,11 @@ public class UpdatePositionJob implements Job {
 
 
         for (User user : memberList ){
+
+            if (user.getLevel() >= quizLocations.size()) {
+                user.resetLevel();
+            }
+
             client.setMsisdn(user.getMsisdn()); // Update client from API.
             point = client.getPoint();
             polygon = quizLocations.get(user.getLevel()).getPolygon();
