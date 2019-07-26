@@ -17,24 +17,16 @@ public class main {
     public static void main(String[] args) {
 
 
-       /*Quiz quiz = new Quiz();
-        int sec = 11;
+        User user;
+
+
+        Quiz quiz = new Quiz();
+        int sec = 10;
 
         quiz.createTestQuiz();
 
-        User user = new User("4740553014");
+        user = new User("4740553014");
         user.setFirstName("Telia");
-        quiz.addMember(user, sec);
-
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        user = new User("4740604325");
-        user.setFirstName("Marcus");
-        System.out.println("ADDING MARCUS \n");
         quiz.addMember(user, sec);
 
             try {
@@ -48,10 +40,16 @@ public class main {
         System.out.println("ADDING Patience \n");
         quiz.addMember(user, sec);
 
-        /*user = new User("4790519192");
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        user = new User("4790519192");
         user.setFirstName("Per Anders");
         System.out.println("ADDING PER ANDERS \n");
-        quiz.addMember(user, sec);*/
+        quiz.addMember(user, sec);
 
     }
 }

@@ -81,8 +81,9 @@ public class UpdatePositionJob implements Job {
             polygon = quizLocations.get(user.getLevel()).getPolygon();
             margin = quizLocations.get(user.getLevel()).getMargin();
 
-            System.out.println("Location of " + user.getFirstName() + " is: " + client.getLocation()+ ".     " +
-                    "Next location: " + quizLocations.get(user.getLevel()).getHint());
+            System.out.println("Location of " + user.getFirstName() + " is: " + client.getLocation()+ "\n" +
+                    "Next location: " + quizLocations.get(user.getLevel()).getHint() + ".     " +
+                    "Current Level: " + user.getLevel() + ".    Margin Count: " + user.getMarginCount());
             logger.info("Location of " + user.getFirstName() + " is: " + client.getLocation()+ "\n" +
                     "Next location: " + quizLocations.get(user.getLevel()).getHint() + ".     " +
                     "Current Level: " + user.getLevel() + ".    Margin Count: " + user.getMarginCount());
@@ -105,7 +106,6 @@ public class UpdatePositionJob implements Job {
 
     public void updateUser(User user){
         user.updateLevel();
-        user.updateScore();
         user.resetMarginCount();
         System.out.println(user.getMsisdn() + " Level up! - "+ user.getLevel() + " 🏋️‍ ");
         logger.info(user.getMsisdn() + " Level up! -  "+ user.getLevel());
