@@ -16,9 +16,10 @@ public class main {
 
     public static void main(String[] args) {
 
+        SmsInvoker client = new SmsInvoker();
+        client.sendMessage("2355","4740553014", "QpjZkUJfGeImOEkdCeXp", "Rlx5lUJdH3jclqx2IolQlCfv4oX1SQZB");
 
-        User user;
-
+        /*User user;
 
         Quiz quiz = new Quiz();
         int sec = 10;
@@ -49,7 +50,7 @@ public class main {
         user = new User("4790519192");
         user.setFirstName("Per Anders");
         System.out.println("ADDING PER ANDERS \n");
-        quiz.addMember(user, sec);
+        quiz.addMember(user, sec);*/
 
     }
 }
