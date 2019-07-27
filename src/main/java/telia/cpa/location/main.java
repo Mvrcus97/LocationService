@@ -17,7 +17,7 @@ public class main {
     public static void main(String[] args) {
 
         SmsInvoker client = new SmsInvoker();
-        client.sendMessage("2355","4740553014", "QpjZkUJfGeImOEkdCeXp", "Rlx5lUJdH3jclqx2IolQlCfv4oX1SQZB");
+        client.sendMessage("2355","4740553014", "", "");
 
         /*User user;
 
