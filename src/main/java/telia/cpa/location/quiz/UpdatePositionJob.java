@@ -1,12 +1,15 @@
 package telia.cpa.location.quiz;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
+import no.differitas._2006._09.messaging.sms.SmsInvoker;
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,10 +24,12 @@ import telia.cpa.location.main;
 public class UpdatePositionJob implements Job {
 
     final static Logger logger = LoggerFactory.getLogger(main.class);
-    CoverageAreaInvoker client = new CoverageAreaInvoker();
+    CoverageAreaInvoker coverageClient = new CoverageAreaInvoker();
+    SmsInvoker client = new SmsInvoker();
     ArrayList<User> memberList;
     ArrayList<QuizLocation> quizLocations;
     Leaderboard leaderboard;
+
 
     public void execute(JobExecutionContext context) throws JobExecutionException {
 
@@ -53,7 +58,9 @@ public class UpdatePositionJob implements Job {
             u = leaderList.get(i);
             System.out.println( u.getScore() + " - "  + u.getFirstName());
         }
+
         System.out.println("------------------------------------------------\n");
+
 
         System.out.println("--------- JOB DONE --------- \n");
 
@@ -67,24 +74,21 @@ public class UpdatePositionJob implements Job {
         Point point;
         Polygon polygon;
         Polygon margin;
+
         System.out.println("memberList size: " + memberList.size());
 
 
         for (User user : memberList ){
 
-            if (user.getLevel() >= quizLocations.size()) {
-                user.resetLevel();
-            }
-
-            client.setMsisdn(user.getMsisdn()); // Update client from API.
-            point = client.getPoint();
+            coverageClient.setMsisdn(user.getMsisdn()); // Update client from API.
+            point = coverageClient.getPoint();
             polygon = quizLocations.get(user.getLevel()).getPolygon();
             margin = quizLocations.get(user.getLevel()).getMargin();
 
-            System.out.println("Location of " + user.getFirstName() + " is: " + client.getLocation()+ "\n" +
+            System.out.println("Location of " + user.getFirstName() + " is: " + coverageClient.getLocation()+ "\n" +
                     "Next location: " + quizLocations.get(user.getLevel()).getHint() + ".     " +
                     "Current Level: " + user.getLevel() + ".    Margin Count: " + user.getMarginCount());
-            logger.info("Location of " + user.getFirstName() + " is: " + client.getLocation()+ "\n" +
+            logger.info("Location of " + user.getFirstName() + " is: " + coverageClient.getLocation()+ "\n" +
                     "Next location: " + quizLocations.get(user.getLevel()).getHint() + ".     " +
                     "Current Level: " + user.getLevel() + ".    Margin Count: " + user.getMarginCount());
 
@@ -93,9 +97,11 @@ public class UpdatePositionJob implements Job {
             } else if (margin.isInside(point)){
                 user.updateMarginCount();
                 System.out.println("marginCount: " + user.getMarginCount());
-                if (user.getMarginCount() >= 4) {
-                    updateUser(user);
-                }
+
+                    if (user.getMarginCount() >= 1) {
+                        updateUser(user);
+                    }
+
             } else {
                 System.out.println("DID NOT LEVEL UP");
             }
@@ -106,9 +112,19 @@ public class UpdatePositionJob implements Job {
 
     public void updateUser(User user){
         user.updateLevel();
-        user.resetMarginCount();
+
+
         System.out.println(user.getMsisdn() + " Level up! - "+ user.getLevel() + " 🏋️‍ ");
         logger.info(user.getMsisdn() + " Level up! -  "+ user.getLevel());
+
+        if (user.getLevel() >= quizLocations.size()) {
+            user.resetLevel();
+        }
+
+        String text = "Congratulations! \nYou are now on level: " + user.getLevel() + "\nNext secrate location: " +
+                quizLocations.get(user.getLevel()).getHint() + ". \n \nYour score: " + user.getScore();
+        client.addMessage(user.getMsisdn(),text);
+
     }
 
 

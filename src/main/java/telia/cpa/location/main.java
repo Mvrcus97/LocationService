@@ -8,6 +8,8 @@ import telia.cpa.location.quiz.UpdatePosition;
 import telia.cpa.location.quiz.User;
 
 import java.util.ArrayList;
+import java.util.UUID;
+
 import org.slf4j.*;
 
 public class main {
@@ -16,10 +18,7 @@ public class main {
 
     public static void main(String[] args) {
 
-        SmsInvoker client = new SmsInvoker();
-        client.sendMessage("2355","4740553014", "", "");
-
-        /*User user;
+        User user;
 
         Quiz quiz = new Quiz();
         int sec = 10;
@@ -30,11 +29,21 @@ public class main {
         user.setFirstName("Telia");
         quiz.addMember(user, sec);
 
-            try {
+           try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
+        user = new User("4740604325");
+        user.setFirstName("TeliaDue");
+        quiz.addMember(user, sec);
+
+       /*try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         user = new User("4798679661");
         user.setFirstName("Patience");
