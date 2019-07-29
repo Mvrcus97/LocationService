@@ -1,5 +1,8 @@
 package telia.cpa.location.quiz;
 
+import java.io.File;
+import java.util.Scanner;
+
 public class User {
     String msisdn;
     String firstName;
@@ -9,6 +12,8 @@ public class User {
     int level;
     int marginCount;
     double timeLastFound;
+    String username;
+    String password;
 
 
     public User(String msisdn){
@@ -54,8 +59,8 @@ public class User {
         double sigmoid = sigmoid(getTimeConstant());
         int extra = (int) Math.round(sigmoid * 100);
         if(extra > 85) extra = 100;
-        System.out.println("Sigmoid is:" + sigmoid);
-        System.out.println("Updated score by: " + extra);
+        //System.out.println("Sigmoid is:" + sigmoid);
+        //System.out.println("Updated score by: " + extra);
         this.score += extra;
     }
 
@@ -64,9 +69,11 @@ public class User {
     }
 
     public void updateLevel(){
-        this.level +=1;
+        this.level += 1;
         updateScore();
+        resetMarginCount();
         this.timeLastFound = System.currentTimeMillis();
+        System.out.println("UpdateLevel completed");
     }
     public void resetLevel() { this.level = 0; }
 
@@ -79,7 +86,7 @@ public class User {
     private double createTimeConstant(){
         double second = (System.currentTimeMillis() - timeLastFound);
         second = second/1000;
-        System.out.println("Second:" + second);
+        //System.out.println("Second:" + second);
         return second;///(60*60);
 
     }
@@ -87,7 +94,7 @@ public class User {
     public double getTimeConstant() {
         double constant = Math.round(6 - createTimeConstant());
         if (constant < 0) constant = 0;
-        System.out.println("Time constant: " + constant);
+        //System.out.println("Time constant: " + constant);
         return constant;
     }
 
@@ -95,4 +102,5 @@ public class User {
     public double sigmoid(double x){
         return (1/( 1 + Math.pow(Math.E,(-0.5*x))));
     }
+
 }
