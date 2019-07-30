@@ -42,6 +42,7 @@ public class UpdatePositionJob implements Job {
         } catch (SchedulerException e1) {
             e1.printStackTrace();
         }
+        // loll
 
         // Get data from Scheduler
         this.memberList = (ArrayList<User>) schedulerContext.get("memberList");
