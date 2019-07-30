@@ -1,6 +1,7 @@
-package no.differitas._2006._09.messaging.sms;
+package telia.cpa.location;
 
 import com.sun.tools.internal.xjc.reader.xmlschema.BindGreen;
+import no.differitas._2006._09.messaging.sms.*;
 
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.handler.MessageContext;

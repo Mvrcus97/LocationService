@@ -1,12 +1,6 @@
 package telia.cpa.location;
 
-import no.differitas._2006._09.messaging.sms.SmsInvoker;
-import org.quartz.Scheduler;
-import sun.security.util.PolicyUtil;
 import telia.cpa.location.quiz.*;
-
-import java.util.ArrayList;
-import java.util.UUID;
 
 import org.slf4j.*;
 
@@ -52,6 +46,10 @@ public class main {
         user = new User("4740553014");
         user.setFirstName("Telia");
         quiz.addMember(user, sec);
+
+        /*user = new User("4794430236");
+        user.setFirstName("Soma");
+        quiz.addMember(user, sec);*/
 
         /*
            try {

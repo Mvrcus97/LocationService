@@ -1,22 +1,17 @@
 package telia.cpa.location.quiz;
 
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
 
-import no.differitas._2006._09.messaging.sms.SmsInvoker;
+import telia.cpa.location.SmsInvoker;
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import telia.cpa.location.Point;
 import telia.cpa.location.Polygon;
 
-import no.differitas._2015._10.coveragearea.CoverageAreaService;
 import telia.cpa.location.CoverageAreaInvoker;
 import telia.cpa.location.main;
 
@@ -87,7 +82,7 @@ public class UpdatePositionJob implements Job {
 
             System.out.println("Location of " + user.getFirstName() + " is: " + coverageClient.getLocation()+ "\n" +
                     "Next location: " + quizLocations.get(user.getLevel()).getHint() + ".     " +
-                    "Current Level: " + user.getLevel() + ".    Margin Count: " + user.getMarginCount());
+                    "Current Level: " + user.getLevel() + ".");
             logger.info("Location of " + user.getFirstName() + " is: " + coverageClient.getLocation()+ "\n" +
                     "Next location: " + quizLocations.get(user.getLevel()).getHint() + ".     " +
                     "Current Level: " + user.getLevel() + ".    Margin Count: " + user.getMarginCount());
@@ -113,27 +108,34 @@ public class UpdatePositionJob implements Job {
     public void updateUser(User user){
 
         Promo promo = new Promo("NON", 0);
-
         if (user.getLevel() < quizLocations.size()) {
             promo = quizLocations.get(user.getLevel()).getPromo();
         }
 
         user.updateLevel();
 
-        System.out.println(user.getMsisdn() + " Level up! - "+ user.getLevel() + " 🏋️‍ ");
+        System.out.println("LEVEL: " + user.getLevel());
+        System.out.println("LOCATOIN SIZE: " + quizLocations.size());
+
+        System.out.println("NEXT HINT: " + quizLocations.get(user.getLevel()).getHint());
+
+        System.out.println(user.getMsisdn() + " Level up! - Now on level " + user.getLevel() + " 🏋️‍ ");
         logger.info(user.getMsisdn() + " Level up! -  "+ user.getLevel());
 
+        String text = "Congratulations!\n" +
+                       "New level: " + user.getLevel() + "\n" +
+                       "Your score is: " + user.getScore() + "\n" +
+                        promo.getPromoText() + "\n\n" +
+                       "Find the next secrete location: " + quizLocations.get(user.getLevel()).getHint();
+
+        client.addMessage(user.getMsisdn(),text);
+
+        System.out.println("MESSAGE SENT");
 
         if (user.getLevel() >= quizLocations.size()) {
             user.resetLevel();
         }
 
-        String text = "Congratulations! \nYou are now on level: " + user.getLevel() +
-                        "\nNext secrate location: " + quizLocations.get(user.getLevel()).getHint() +
-                        ". \n \nYour score: " + user.getScore() + "\n" +
-                        promo.getPromoText();
-
-        client.addMessage(user.getMsisdn(),text);
 
     }
 
