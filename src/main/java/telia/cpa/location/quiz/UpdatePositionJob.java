@@ -45,7 +45,6 @@ public class UpdatePositionJob implements Job {
         this.leaderboard = (Leaderboard) schedulerContext.get("leaderboard");
 
         checkMemberList();
-        leaderboard.sort();
 
         List<User> leaderList = leaderboard.getTopN(10);
         System.out.println("\n----------------LEADERBOARD---------------------");
@@ -114,25 +113,40 @@ public class UpdatePositionJob implements Job {
         }
 
         user.updateLevel();
+        leaderboard.sort();
 
         System.out.println(user.getMsisdn() + " Level up! - Now on level " + user.getLevel() + " 🏋️‍ ");
         logger.info(user.getMsisdn() + " Level up! -  "+ user.getLevel());
-
-        String text = "Congratulations, " + user.getFirstName() + "!\n\n" +
-                "New level: " + user.getLevel() + "\n" +
-                "Your score is: " + user.getScore() + "\n\n" +
-                promo.getPromoText() + "\n\n" +
-                "Find the next secrete location: " + quizLocations.get(user.getLevel() -1 ).getHint();
-
-        client.addMessage(user.getMsisdn(),text);
+        sendSMS(user);
 
         if (user.getLevel() >= quizLocations.size()) {
             user.resetLevel();
         }
-
     }
 
+    public void sendSMS(User user){
+        StringBuilder levelUptxt = new StringBuilder("Congratulations, ");
+        levelUptxt.append(user.getFirstName()).append("!\n\nNew Level: ").append(user.getLevel()).append("\nYour score is: ").append(user.getScore()).append("\n\n");
+        levelUptxt.append("Here is your reward:\nhttp://telia-summer-interns.s3-website-eu-west-1.amazonaws.com/\n\n");
 
+        StringBuilder leaderboardTxt = new StringBuilder("-----LEADERBOARD-----\n");
+        User u;
+        List<User> leaderList = leaderboard.getTopN(10);
+
+        for(int i = 0 ; i < leaderList.size(); i++){
+            u = leaderList.get(i);
+            leaderboardTxt.append(u.getScore());
+            leaderboardTxt.append(" - " );
+            leaderboardTxt.append(u.getFirstName());
+            leaderboardTxt.append("\n");
+            System.out.println( u.getScore() + " - "  + u.getFirstName());
+        }
+
+        leaderboardTxt.append("--------------------------\n\n\nFind your next secret Location: ").append(quizLocations.get(user.getLevel()-1).getHint());
+
+        levelUptxt.append(leaderboardTxt);
+        client.addMessage(user.getMsisdn(), levelUptxt.toString());
+    }
 
  }
 

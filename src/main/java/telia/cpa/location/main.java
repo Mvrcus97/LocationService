@@ -23,35 +23,25 @@ public class main {
         quiz.createTestQuiz();
 
         user = new User("4740553014");
-        user.setFirstName("Telia");
+        user.setFirstName("Telia Test Phone");
         quiz.addMember(user, sec);
-/*
-        User user;
 
-        Quiz quiz = new Quiz();
-        int sec = 11;
-
-        quiz.createTestQuiz();
-
-        user = new User("4740553014");
-        user.setFirstName("Telia");
-        quiz.addMember(user, sec);
 
         /*user = new User("4794430236");
-        user.setFirstName("Soma");
-        quiz.addMember(user, sec);*/
+        user.setFirstName("Soma-Loma-Poma");
+        quiz.addMember(user, sec);
 
-        /*
-           try {
+
+         /*  try {
                 Thread.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
+    */
         user = new User("4740604325");
-        user.setFirstName("TeliaDue");
+        user.setFirstName("Marcus ;) ");
         quiz.addMember(user, sec);
-
+/*6
        try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {

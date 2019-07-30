@@ -34,7 +34,6 @@ public class SmsInvoker {
         this.originatingAddress = new Address();
         originatingAddress.setValue("QuizGame");
         updateLogin();
-        getCref();
         System.out.println("client created");
 
     }
@@ -52,11 +51,11 @@ public class SmsInvoker {
         username = reader.next();
         password = reader.next();
 
-        System.out.println("Username: " + username + ", password: " + password);
+        //System.out.println("Username: " + username + ", password: " + password);
 
     }
 
-    public void getCref(){
+    public void updateCref(){
         File txt = new File("src/main/java/telia/cpa/location/crefCounter");
         Scanner reader = null;
         try {
@@ -99,6 +98,7 @@ public class SmsInvoker {
        Content content = new Content();
        content.getText().add(text);
 
+        updateCref();
        SubmitMessage message = new SubmitMessage();
         message.setCref(cref);
         message.setAccount(account);
@@ -119,9 +119,7 @@ public class SmsInvoker {
     public void sendMessage(){
 
         try {
-            System.out.println("BEFORE SUBMIT");
-           port.submit(request);
-            System.out.println("AFTER SUBMIT");
+          response =  port.submit(request);
         } catch (SmsServiceSubmitServerFaultFaultMessage smsServiceSubmitServerFaultFaultMessage) {
             smsServiceSubmitServerFaultFaultMessage.printStackTrace();
         } catch (SmsServiceSubmitValidationFaultFaultMessage smsServiceSubmitValidationFaultFaultMessage) {
@@ -130,7 +128,7 @@ public class SmsInvoker {
 
 
         //response.getReportMessage().get(0);
-        //System.out.println("Response: " + response.getReportMessage().get(0).getStatus());
+        System.out.println("RESPONSE ERROR: " + response.getReportMessage().get(0).getStatus().getValue());
     }
 
 }
