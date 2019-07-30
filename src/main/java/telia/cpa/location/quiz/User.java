@@ -58,9 +58,9 @@ public class User {
     public void updateScore(){
         double sigmoid = sigmoid(getTimeConstant());
         int extra = (int) Math.round(sigmoid * 100);
-        if(extra > 85) extra = 100;
-        //System.out.println("Sigmoid is:" + sigmoid);
-        //System.out.println("Updated score by: " + extra);
+        //if(extra > 85) extra = 100;
+       // System.out.println("Sigmoid is:" + sigmoid);
+        // System.out.println("Updated score by: " + extra);
         this.score += extra;
     }
 
@@ -73,7 +73,7 @@ public class User {
         updateScore();
         resetMarginCount();
         this.timeLastFound = System.currentTimeMillis();
-        System.out.println("UpdateLevel completed");
+        //System.out.println("UpdateLevel completed");
     }
     public void resetLevel() { this.level = 0; }
 
@@ -92,12 +92,11 @@ public class User {
     }
 
     public double getTimeConstant() {
-        double constant = Math.round(6 - createTimeConstant());
+        double constant = Math.round(30*60 - createTimeConstant());
         if (constant < 0) constant = 0;
         //System.out.println("Time constant: " + constant);
         return constant;
     }
-
 
     public double sigmoid(double x){
         return (1/( 1 + Math.pow(Math.E,(-0.5*x))));

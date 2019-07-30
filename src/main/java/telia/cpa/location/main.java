@@ -18,19 +18,21 @@ public class main {
 
     public static void main(String[] args) {
 
-        User user;
+       User user;
 
         Quiz quiz = new Quiz();
-        int sec = 10;
+        int sec = 11;
 
         quiz.createTestQuiz();
+        //quiz.createPromos();
 
         user = new User("4740553014");
         user.setFirstName("Telia");
         quiz.addMember(user, sec);
 
+        /*
            try {
-                Thread.sleep(3000);
+                Thread.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -39,7 +41,7 @@ public class main {
         user.setFirstName("TeliaDue");
         quiz.addMember(user, sec);
 
-       /*try {
+       try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
