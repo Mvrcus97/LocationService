@@ -1,14 +1,6 @@
 package telia.cpa.location;
 
-import no.differitas._2006._09.messaging.sms.SmsInvoker;
-import org.quartz.Scheduler;
-import telia.cpa.location.quiz.Quiz;
-import telia.cpa.location.quiz.QuizLocation;
-import telia.cpa.location.quiz.UpdatePosition;
-import telia.cpa.location.quiz.User;
-
-import java.util.ArrayList;
-import java.util.UUID;
+import telia.cpa.location.quiz.*;
 
 import org.slf4j.*;
 
@@ -18,17 +10,36 @@ public class main {
 
     public static void main(String[] args) {
 
-       User user;
+        Promo promo;
+        Polygon actual, margin;
+        QuizLocation quizLocation;
+
+
+        User user;
 
         Quiz quiz = new Quiz();
         int sec = 11;
 
         quiz.createTestQuiz();
-        //quiz.createPromos();
 
         user = new User("4740553014");
         user.setFirstName("Telia");
         quiz.addMember(user, sec);
+/*
+        User user;
+
+        Quiz quiz = new Quiz();
+        int sec = 11;
+
+        quiz.createTestQuiz();
+
+        user = new User("4740553014");
+        user.setFirstName("Telia");
+        quiz.addMember(user, sec);
+
+        /*user = new User("4794430236");
+        user.setFirstName("Soma");
+        quiz.addMember(user, sec);*/
 
         /*
            try {

@@ -1,22 +1,17 @@
 package telia.cpa.location.quiz;
 
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
 
-import no.differitas._2006._09.messaging.sms.SmsInvoker;
+import telia.cpa.location.SmsInvoker;
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import telia.cpa.location.Point;
 import telia.cpa.location.Polygon;
 
-import no.differitas._2015._10.coveragearea.CoverageAreaService;
 import telia.cpa.location.CoverageAreaInvoker;
 import telia.cpa.location.main;
 
@@ -31,7 +26,7 @@ public class UpdatePositionJob implements Job {
     Leaderboard leaderboard;
 
 
-    public void execute(JobExecutionContext context) throws JobExecutionException {
+    public void execute(JobExecutionContext context){
 
         System.out.println("\n --------- JOB STARTED ---------      " + new Date());
 
@@ -88,7 +83,7 @@ public class UpdatePositionJob implements Job {
 
             System.out.println("Location of " + user.getFirstName() + " is: " + coverageClient.getLocation()+ "\n" +
                     "Next location: " + quizLocations.get(user.getLevel()).getHint() + ".     " +
-                    "Current Level: " + user.getLevel() + ".    Margin Count: " + user.getMarginCount());
+                    "Current Level: " + user.getLevel() + ".");
             logger.info("Location of " + user.getFirstName() + " is: " + coverageClient.getLocation()+ "\n" +
                     "Next location: " + quizLocations.get(user.getLevel()).getHint() + ".     " +
                     "Current Level: " + user.getLevel() + ".    Margin Count: " + user.getMarginCount());
@@ -97,9 +92,9 @@ public class UpdatePositionJob implements Job {
                 updateUser(user);
             } else if (margin.isInside(point)){
                 user.updateMarginCount();
-                System.out.println("marginCount: " + user.getMarginCount());
+                System.out.println("marginCount: " + user.getMarginCount() + "\n");
 
-                    if (user.getMarginCount() >= 4) {
+                    if (user.getMarginCount() >= 2) {
                         updateUser(user);
                     }
 
@@ -112,22 +107,28 @@ public class UpdatePositionJob implements Job {
 
 
     public void updateUser(User user){
+
+        Promo promo = new Promo("NON", 0);
+        if (user.getLevel() < quizLocations.size()) {
+            promo = quizLocations.get(user.getLevel()).getPromo();
+        }
+
         user.updateLevel();
 
-        System.out.println(quizLocations.get);
-
-        System.out.println(user.getMsisdn() + " Level up! - "+ user.getLevel() + " 🏋️‍ ");
+        System.out.println(user.getMsisdn() + " Level up! - Now on level " + user.getLevel() + " 🏋️‍ ");
         logger.info(user.getMsisdn() + " Level up! -  "+ user.getLevel());
+
+        String text = "Congratulations, " + user.getFirstName() + "!\n\n" +
+                "New level: " + user.getLevel() + "\n" +
+                "Your score is: " + user.getScore() + "\n\n" +
+                promo.getPromoText() + "\n\n" +
+                "Find the next secrete location: " + quizLocations.get(user.getLevel() -1 ).getHint();
+
+        client.addMessage(user.getMsisdn(),text);
 
         if (user.getLevel() >= quizLocations.size()) {
             user.resetLevel();
         }
-
-        String text = "Congratulations! \nYou are now on level: " + user.getLevel() +
-                        "\nNext secrate location: " + quizLocations.get(user.getLevel()).getHint() +
-                        ". \n \nYour score: " + user.getScore();
-
-        client.addMessage(user.getMsisdn(),text);
 
     }
 

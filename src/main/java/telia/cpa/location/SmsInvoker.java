@@ -1,11 +1,15 @@
-package no.differitas._2006._09.messaging.sms;
+package telia.cpa.location;
 
-import com.sun.tools.internal.xjc.reader.xmlschema.BindGreen;
+import no.differitas._2006._09.messaging.sms.*;
+
 
 import javax.xml.ws.BindingProvider;
-import javax.xml.ws.handler.MessageContext;
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Map;
+import java.util.Scanner;
 
 public class SmsInvoker {
 
@@ -37,7 +41,7 @@ public class SmsInvoker {
 
     public void updateLogin(){
 
-        File txt = new File("/Users/gwv9478/Desktop/LocationService/src/main/java/telia/cpa/location/login");
+        File txt = new File("src/main/java/telia/cpa/location/login");
         Scanner reader = null;
         try {
             reader = new Scanner(txt);
@@ -48,13 +52,12 @@ public class SmsInvoker {
         username = reader.next();
         password = reader.next();
 
-        //System.out.println("Username: " + username + ", password: " + password);
+        System.out.println("Username: " + username + ", password: " + password);
 
     }
 
     public void getCref(){
-
-        File txt = new File("/Users/gwv9478/Desktop/LocationService/src/main/java/telia/cpa/location/crefCounter");
+        File txt = new File("src/main/java/telia/cpa/location/crefCounter");
         Scanner reader = null;
         try {
             reader = new Scanner(txt);
@@ -70,7 +73,7 @@ public class SmsInvoker {
 
 
         try {
-            FileWriter fw = new FileWriter("/Users/gwv9478/Desktop/LocationService/src/main/java/telia/cpa/location/crefCounter");
+            FileWriter fw = new FileWriter("src/main/java/telia/cpa/location/crefCounter");
             fw.write(String.valueOf(newCref));
 
             fw.close();
@@ -116,7 +119,9 @@ public class SmsInvoker {
     public void sendMessage(){
 
         try {
-            port.submit(request);
+            System.out.println("BEFORE SUBMIT");
+           port.submit(request);
+            System.out.println("AFTER SUBMIT");
         } catch (SmsServiceSubmitServerFaultFaultMessage smsServiceSubmitServerFaultFaultMessage) {
             smsServiceSubmitServerFaultFaultMessage.printStackTrace();
         } catch (SmsServiceSubmitValidationFaultFaultMessage smsServiceSubmitValidationFaultFaultMessage) {
