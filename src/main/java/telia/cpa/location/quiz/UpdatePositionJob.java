@@ -114,23 +114,16 @@ public class UpdatePositionJob implements Job {
 
         user.updateLevel();
 
-        System.out.println("LEVEL: " + user.getLevel());
-        System.out.println("LOCATOIN SIZE: " + quizLocations.size());
-
-        System.out.println("NEXT HINT: " + quizLocations.get(user.getLevel()).getHint());
-
         System.out.println(user.getMsisdn() + " Level up! - Now on level " + user.getLevel() + " 🏋️‍ ");
         logger.info(user.getMsisdn() + " Level up! -  "+ user.getLevel());
 
-        String text = "Congratulations!\n" +
+        String text = "Congratulations, " + user.getFirstName() + "!\n\n" +
                        "New level: " + user.getLevel() + "\n" +
-                       "Your score is: " + user.getScore() + "\n" +
+                       "Your score is: " + user.getScore() + "\n\n" +
                         promo.getPromoText() + "\n\n" +
-                       "Find the next secrete location: " + quizLocations.get(user.getLevel()).getHint();
+                       "Find the next secrete location: " + quizLocations.get(user.getLevel() -1 ).getHint();
 
         client.addMessage(user.getMsisdn(),text);
-
-        System.out.println("MESSAGE SENT");
 
         if (user.getLevel() >= quizLocations.size()) {
             user.resetLevel();

@@ -47,9 +47,9 @@ public class main {
         user.setFirstName("Telia");
         quiz.addMember(user, sec);
 
-        /*user = new User("4794430236");
+        user = new User("4794430236");
         user.setFirstName("Soma");
-        quiz.addMember(user, sec);*/
+        quiz.addMember(user, sec);
 
         /*
            try {
