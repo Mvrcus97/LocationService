@@ -14,16 +14,14 @@ public class QuizLocation {
     private Polygon polygon;
     private Polygon margin;
     private String hint;
-    private ArrayList<Promo> promos;
+    private Promo promo;
 
 
     public QuizLocation(Polygon polygon, Polygon margin, String hint, Promo promo){
         this.polygon = polygon;
         this.margin = margin;
         this.hint = hint;
-        this.promos = new ArrayList<>();
-        addPromos(promo);
-
+        this.promo = promo;
     }
 
     //Setters and Getters.
@@ -33,13 +31,15 @@ public class QuizLocation {
 
     public void setMargin(Polygon margin) { this.margin = margin; }
 
-    public void addPromos(Promo promo){ promos.add(promo);}
-
     public String getHint(){ return this.hint; }
 
     public Polygon getPolygon(){ return this.polygon; }
 
     public Polygon getMargin() { return this.margin; }
+
+    public Promo getPromo(){ return this.promo; }
+
+    //public ArrayList<Promo> getPromos() {return this.promos; }
 
 
 }
