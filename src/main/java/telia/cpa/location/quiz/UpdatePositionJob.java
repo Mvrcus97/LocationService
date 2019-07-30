@@ -31,7 +31,7 @@ public class UpdatePositionJob implements Job {
     Leaderboard leaderboard;
 
 
-    public void execute(JobExecutionContext context) throws JobExecutionException {
+    public void execute(JobExecutionContext context){
 
         System.out.println("\n --------- JOB STARTED ---------      " + new Date());
 
@@ -84,8 +84,6 @@ public class UpdatePositionJob implements Job {
             point = coverageClient.getPoint();
             polygon = quizLocations.get(user.getLevel()).getPolygon();
             margin = quizLocations.get(user.getLevel()).getMargin();
-            //Promo promo1 = quizLocations.get(user.getLevel()).getPromo(user.getLevel());
-            //System.out.println("PROMO: " + promo1.getPromoText());
 
             System.out.println("Location of " + user.getFirstName() + " is: " + coverageClient.getLocation()+ "\n" +
                     "Next location: " + quizLocations.get(user.getLevel()).getHint() + ".     " +
@@ -98,7 +96,7 @@ public class UpdatePositionJob implements Job {
                 updateUser(user);
             } else if (margin.isInside(point)){
                 user.updateMarginCount();
-                System.out.println("marginCount: " + user.getMarginCount());
+                System.out.println("marginCount: " + user.getMarginCount() + "\n");
 
                     if (user.getMarginCount() >= 2) {
                         updateUser(user);
@@ -114,12 +112,14 @@ public class UpdatePositionJob implements Job {
 
     public void updateUser(User user){
 
+        Promo promo = new Promo("NON", 0);
+
         if (user.getLevel() < quizLocations.size()) {
-            Promo promo1 = quizLocations.get(0).getPromo(0);
-            System.out.println("PROMO: " + promo1.getPromoText());
+            promo = quizLocations.get(user.getLevel()).getPromo();
         }
 
         user.updateLevel();
+
         System.out.println(user.getMsisdn() + " Level up! - "+ user.getLevel() + " 🏋️‍ ");
         logger.info(user.getMsisdn() + " Level up! -  "+ user.getLevel());
 
@@ -130,7 +130,8 @@ public class UpdatePositionJob implements Job {
 
         String text = "Congratulations! \nYou are now on level: " + user.getLevel() +
                         "\nNext secrate location: " + quizLocations.get(user.getLevel()).getHint() +
-                        ". \n \nYour score: " + user.getScore();
+                        ". \n \nYour score: " + user.getScore() + "\n" +
+                        promo.getPromoText();
 
         client.addMessage(user.getMsisdn(),text);
 

@@ -16,6 +16,7 @@ public class Quiz {
         this.quizLocations = new ArrayList<>();
         this.memberList = new ArrayList<>();
         this.leaderboard = new Leaderboard();
+
     }
 
     public void addQuizLocation(QuizLocation quizLocation) {
@@ -79,12 +80,11 @@ public class Quiz {
         quizLocation = new QuizLocation(actual, margin,"purple", promo);
         addQuizLocation(quizLocation);
 
-        promo = new Promo("Telia",45);
+        promo = new Promo("Telia2",45);
         actual = new Polygon("POLYGON ((10.766267113933509 59.952661724072996,10.766787462482398 59.95189887810627,10.767635040531104 59.95208959124402,10.766267113933509 59.952661724072996))");
         margin = new Polygon("POLYGON ((10.768277942062582 59.95317436842931,10.766904651046957 59.95335701625844,10.764200984359945 59.9532818084507,10.76407223832723 59.95208920468926,10.764673053146566 59.951541237221186,10.766701369001112 59.95143307329731,10.76850381345912 59.95175540925114,10.768277942062582 59.95317436842931))");
         quizLocation = new QuizLocation(actual, margin,"purple1", promo);
         addQuizLocation(quizLocation);
-
 
         /*
 
