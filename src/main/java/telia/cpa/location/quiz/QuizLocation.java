@@ -41,5 +41,9 @@ public class QuizLocation {
 
     public Polygon getMargin() { return this.margin; }
 
+    public Promo getPromo(int index){ return promos.get(index); }
+
+    //public ArrayList<Promo> getPromos() {return this.promos; }
+
 
 }

@@ -9,7 +9,7 @@ public class Promo {
     public Promo(String owner, int promo){
         this.owner = owner;
         this.prosent = promo;
-        this.text = "You get " + promo + "% off from " + owner + "!";
+        this.text = "You get " + promo + " % off from " + owner + "!";
     }
 
     public void setProsent(int prosent) {
@@ -28,7 +28,7 @@ public class Promo {
         return owner;
     }
 
-    public String getPromo(){
+    public String getPromoText(){
         return text;
     }
 }

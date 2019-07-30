@@ -84,6 +84,8 @@ public class UpdatePositionJob implements Job {
             point = coverageClient.getPoint();
             polygon = quizLocations.get(user.getLevel()).getPolygon();
             margin = quizLocations.get(user.getLevel()).getMargin();
+            //Promo promo1 = quizLocations.get(user.getLevel()).getPromo(user.getLevel());
+            //System.out.println("PROMO: " + promo1.getPromoText());
 
             System.out.println("Location of " + user.getFirstName() + " is: " + coverageClient.getLocation()+ "\n" +
                     "Next location: " + quizLocations.get(user.getLevel()).getHint() + ".     " +
@@ -98,7 +100,7 @@ public class UpdatePositionJob implements Job {
                 user.updateMarginCount();
                 System.out.println("marginCount: " + user.getMarginCount());
 
-                    if (user.getMarginCount() >= 4) {
+                    if (user.getMarginCount() >= 2) {
                         updateUser(user);
                     }
 
@@ -111,12 +113,16 @@ public class UpdatePositionJob implements Job {
 
 
     public void updateUser(User user){
+
+        if (user.getLevel() < quizLocations.size()) {
+            Promo promo1 = quizLocations.get(0).getPromo(0);
+            System.out.println("PROMO: " + promo1.getPromoText());
+        }
+
         user.updateLevel();
-
-        System.out.println(quizLocations.get);
-
         System.out.println(user.getMsisdn() + " Level up! - "+ user.getLevel() + " 🏋️‍ ");
         logger.info(user.getMsisdn() + " Level up! -  "+ user.getLevel());
+
 
         if (user.getLevel() >= quizLocations.size()) {
             user.resetLevel();
