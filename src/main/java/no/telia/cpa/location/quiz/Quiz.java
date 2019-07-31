@@ -25,6 +25,7 @@ public class Quiz {
         this.memberList = new ArrayList<>();
         this.leaderboard = new Leaderboard();
 
+
     }
 
     public void addQuizLocation(QuizLocation quizLocation) {

@@ -1,5 +1,6 @@
 package no.telia.cpa.location.clients;
 
+import com.sun.tools.internal.xjc.reader.xmlschema.BindGreen;
 import no.differitas._2006._09.messaging.sms.*;
 
 
@@ -109,7 +110,6 @@ public class SmsInvoker {
         message.setOA(originatingAddress);
         message.setContent(content);
 
-        //Add basic authentication header, and actual endpoint URL.
         Map<String, Object> reqContext = ((BindingProvider) port).getRequestContext();
         reqContext.put(BindingProvider.USERNAME_PROPERTY, username);
         reqContext.put(BindingProvider.PASSWORD_PROPERTY, password);
