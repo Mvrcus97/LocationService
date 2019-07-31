@@ -1,4 +1,4 @@
-package telia.cpa.location;
+package no.telia.cpa.location;
 
 import org.junit.jupiter.api.Test;
 

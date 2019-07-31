@@ -1,7 +1,7 @@
-package telia.cpa.location.quiz;
+package no.telia.cpa.location.quiz;
 
-import telia.cpa.location.Polygon;
-import telia.cpa.location.quiz.cronJob.UpdatePosition;
+import no.telia.cpa.location.Polygon;
+import no.telia.cpa.location.quiz.cronJob.UpdatePosition;
 
 import java.util.ArrayList;
 import java.util.List;

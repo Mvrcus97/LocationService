@@ -1,7 +1,6 @@
-package telia.cpa.location;
+package no.telia.cpa.location;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /*

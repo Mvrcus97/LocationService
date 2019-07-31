@@ -1,4 +1,4 @@
-package telia.cpa.location.clients;
+package no.telia.cpa.location.clients;
 
 import no.differitas._2006._09.messaging.sms.*;
 
@@ -55,7 +55,7 @@ public class SmsInvoker {
     }
 
     public void updateLogin(){
-        File txt = new File("src/main/java/telia/cpa/location/login");
+        File txt = new File("src/main/java/no/telia/cpa/location/login");
         Scanner reader = null;
         try {
             reader = new Scanner(txt);
@@ -71,7 +71,7 @@ public class SmsInvoker {
     }
 
     public void updateCref(){
-        File txt = new File("src/main/java/telia/cpa/location/crefCounter");
+        File txt = new File("src/main/java/no/telia/cpa/location/crefCounter");
         //Read file
         Scanner reader = null;
         try {reader = new Scanner(txt);}
@@ -81,7 +81,7 @@ public class SmsInvoker {
         int newCref = Integer.parseInt(cref) + 1;
         //Update file
         try {
-            FileWriter fw = new FileWriter("src/main/java/telia/cpa/location/crefCounter");
+            FileWriter fw = new FileWriter("src/main/java/no/telia/cpa/location/crefCounter");
             fw.write(String.valueOf(newCref));
             fw.close();
         } catch (IOException e) {e.printStackTrace();}

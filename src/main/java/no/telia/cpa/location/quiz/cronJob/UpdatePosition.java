@@ -1,10 +1,10 @@
-package telia.cpa.location.quiz.cronJob;
+package no.telia.cpa.location.quiz.cronJob;
 
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
-import telia.cpa.location.quiz.Leaderboard;
-import telia.cpa.location.quiz.QuizLocation;
-import telia.cpa.location.quiz.User;
+import no.telia.cpa.location.quiz.Leaderboard;
+import no.telia.cpa.location.quiz.QuizLocation;
+import no.telia.cpa.location.quiz.User;
 
 import java.util.ArrayList;
 import java.util.Date;

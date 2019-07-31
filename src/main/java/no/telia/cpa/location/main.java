@@ -1,6 +1,6 @@
-package telia.cpa.location;
+package no.telia.cpa.location;
 
-import telia.cpa.location.quiz.*;
+import no.telia.cpa.location.quiz.*;
 
 import org.slf4j.*;
 

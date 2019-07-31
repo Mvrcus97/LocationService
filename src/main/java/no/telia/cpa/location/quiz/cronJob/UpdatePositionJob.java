@@ -1,21 +1,21 @@
-package telia.cpa.location.quiz.cronJob;
+package no.telia.cpa.location.quiz.cronJob;
 
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import telia.cpa.location.clients.SmsInvoker;
+import no.telia.cpa.location.clients.SmsInvoker;
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import telia.cpa.location.Point;
-import telia.cpa.location.Polygon;
-import telia.cpa.location.clients.CoverageAreaInvoker;
-import telia.cpa.location.main;
-import telia.cpa.location.quiz.Leaderboard;
-import telia.cpa.location.quiz.Promo;
-import telia.cpa.location.quiz.QuizLocation;
-import telia.cpa.location.quiz.User;
+import no.telia.cpa.location.Point;
+import no.telia.cpa.location.Polygon;
+import no.telia.cpa.location.clients.CoverageAreaInvoker;
+import no.telia.cpa.location.main;
+import no.telia.cpa.location.quiz.Leaderboard;
+import no.telia.cpa.location.quiz.Promo;
+import no.telia.cpa.location.quiz.QuizLocation;
+import no.telia.cpa.location.quiz.User;
 
 
 /* This class represents the cronJob which will be ran continuously.

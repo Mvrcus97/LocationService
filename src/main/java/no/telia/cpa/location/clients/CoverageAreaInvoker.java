@@ -1,7 +1,7 @@
-package telia.cpa.location.clients;
+package no.telia.cpa.location.clients;
 
 import no.differitas._2015._10.coveragearea.*;
-import telia.cpa.location.Point;
+import no.telia.cpa.location.Point;
 
 import java.util.*;
 

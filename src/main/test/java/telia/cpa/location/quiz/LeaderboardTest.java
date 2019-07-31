@@ -1,11 +1,11 @@
-package telia.cpa.location.quiz;
+package no.telia.cpa.location.quiz;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import telia.cpa.location.*;
-import telia.cpa.location.quiz.*;
+import no.telia.cpa.location.*;
+import no.telia.cpa.location.quiz.*;
 
 import java.util.List;
 

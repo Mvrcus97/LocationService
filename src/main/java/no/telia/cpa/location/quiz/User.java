@@ -1,4 +1,4 @@
-package telia.cpa.location.quiz;
+package no.telia.cpa.location.quiz;
 
 
 

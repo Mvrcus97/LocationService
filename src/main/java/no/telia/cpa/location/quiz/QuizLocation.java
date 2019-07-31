@@ -1,8 +1,7 @@
-package telia.cpa.location.quiz;
+package no.telia.cpa.location.quiz;
 
 
-import telia.cpa.location.Polygon;
-import java.util.ArrayList;
+import no.telia.cpa.location.Polygon;
 
 /*
      * Class represents a Quiz Location. Including the actual polygon and a margin polygon,

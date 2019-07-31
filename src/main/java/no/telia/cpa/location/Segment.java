@@ -1,4 +1,4 @@
-package telia.cpa.location;
+package no.telia.cpa.location;
 
 
 public class Segment {
