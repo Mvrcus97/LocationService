@@ -27,19 +27,20 @@ public class QuizLocation {
     private Polygon polygon;
     private Polygon margin;
     private String hint;
-    private Promo promo;
+    private String promo;
 
 
-    public QuizLocation(Polygon polygon, Polygon margin, String hint, Promo promo){
+    public QuizLocation(Polygon polygon, Polygon margin, String hint){
         this.polygon = polygon;
         this.margin = margin;
         this.hint = hint;
-        this.promo = promo;
+        this.promo = null;
     }
 
     //Setters and Getters.
     public void setHint(String hint){ this.hint = hint; }
 
+    public void setPromo(String promo){this.promo = promo;}
     public void setPolygon(Polygon polygon){ this.polygon = polygon; }
 
     public void setMargin(Polygon margin) { this.margin = margin; }
@@ -50,7 +51,7 @@ public class QuizLocation {
 
     public Polygon getMargin() { return this.margin; }
 
-    public Promo getPromo(){ return this.promo; }
+    public String getPromo(){ return this.promo; }
 
     //public ArrayList<Promo> getPromos() {return this.promos; }
 }
