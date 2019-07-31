@@ -10,7 +10,6 @@ public class main {
 
     public static void main(String[] args) {
 
-        Promo promo;
         Polygon actual, margin;
         QuizLocation quizLocation;
 
