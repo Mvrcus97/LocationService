@@ -77,7 +77,6 @@ public class UpdatePositionJob implements Job {
 
         for (User user : memberList ){
             coverageClient.setMsisdn(user.getMsisdn()); // Update client from API.
-            System.out.println("Here? ");
             point = coverageClient.getPoint();
             if (point == null) continue;
             polygon = quizLocations.get(user.getLevel()).getPolygon();
