@@ -1,19 +1,30 @@
-package telia.cpa.location.quiz;
+package telia.cpa.location.quiz.cronJob;
 
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import telia.cpa.location.SmsInvoker;
+import telia.cpa.location.clients.SmsInvoker;
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import telia.cpa.location.Point;
 import telia.cpa.location.Polygon;
-
-import telia.cpa.location.CoverageAreaInvoker;
+import telia.cpa.location.clients.CoverageAreaInvoker;
 import telia.cpa.location.main;
+import telia.cpa.location.quiz.Leaderboard;
+import telia.cpa.location.quiz.Promo;
+import telia.cpa.location.quiz.QuizLocation;
+import telia.cpa.location.quiz.User;
+
+
+/* This class represents the cronJob which will be ran continuously.
+ * The main goal of the job is to go through each member and check
+ * if they are located within their current given Secret Location.
+ *
+ * Once the job finds a user who is located correctly ->
+ * update that user and send them a corresponding text SMS.
+ */
 
 @DisallowConcurrentExecution
 public class UpdatePositionJob implements Job {
@@ -27,9 +38,7 @@ public class UpdatePositionJob implements Job {
 
 
     public void execute(JobExecutionContext context){
-
         System.out.println("\n --------- JOB STARTED ---------      " + new Date());
-
         SchedulerContext schedulerContext = null;
 
         try {
@@ -37,24 +46,17 @@ public class UpdatePositionJob implements Job {
         } catch (SchedulerException e1) {
             e1.printStackTrace();
         }
-        // loll
 
         // Get data from Scheduler
         this.memberList = (ArrayList<User>) schedulerContext.get("memberList");
         this.quizLocations = (ArrayList<QuizLocation>) schedulerContext.get("quizLocations");
         this.leaderboard = (Leaderboard) schedulerContext.get("leaderboard");
 
+        //Go through memberlist
         checkMemberList();
 
-        List<User> leaderList = leaderboard.getTopN(10);
-        System.out.println("\n----------------LEADERBOARD---------------------");
-        User u;
-        for(int i = 0 ; i < leaderList.size(); i++){
-            u = leaderList.get(i);
-            System.out.println( u.getScore() + " - "  + u.getFirstName());
-        }
-
-        System.out.println("------------------------------------------------\n");
+        //Print leaderboard
+        leaderboard.print(10);
 
 
         System.out.println("--------- JOB DONE --------- \n");
@@ -74,9 +76,10 @@ public class UpdatePositionJob implements Job {
 
 
         for (User user : memberList ){
-
             coverageClient.setMsisdn(user.getMsisdn()); // Update client from API.
+            System.out.println("Here? ");
             point = coverageClient.getPoint();
+            if (point == null) continue;
             polygon = quizLocations.get(user.getLevel()).getPolygon();
             margin = quizLocations.get(user.getLevel()).getMargin();
 
@@ -122,7 +125,10 @@ public class UpdatePositionJob implements Job {
         if (user.getLevel() >= quizLocations.size()) {
             user.resetLevel();
         }
-    }
+    }//end updateUser
+
+
+
 
     public void sendSMS(User user){
         StringBuilder levelUptxt = new StringBuilder("Congratulations, ");
@@ -139,14 +145,12 @@ public class UpdatePositionJob implements Job {
             leaderboardTxt.append(" - " );
             leaderboardTxt.append(u.getFirstName());
             leaderboardTxt.append("\n");
-            System.out.println( u.getScore() + " - "  + u.getFirstName());
         }
 
         leaderboardTxt.append("--------------------------\n\n\nFind your next secret Location: ").append(quizLocations.get(user.getLevel()-1).getHint());
 
         levelUptxt.append(leaderboardTxt);
         client.addMessage(user.getMsisdn(), levelUptxt.toString());
-    }
-
- }
+    }//end sendSMS
+ }//end updatePositionJob
 

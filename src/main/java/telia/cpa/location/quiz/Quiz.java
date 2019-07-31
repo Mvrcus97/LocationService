@@ -1,12 +1,20 @@
 package telia.cpa.location.quiz;
 
 import telia.cpa.location.Polygon;
+import telia.cpa.location.quiz.cronJob.UpdatePosition;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Quiz {
+/* The Quiz class is one of the most central classes in this project.
+ * The Quiz represents an entire instance of a QuizGame, and acts as a "Game Master" / State-keeper.
+ *
+ * A game includes a list of QuizLocations, a memberlist, a Leaderboard and also
+ * a cron job called UpdatePosition which task is to check through the memberlist and
+ * update the game-state dependent on the players' position.
+ */
 
+public class Quiz {
     private ArrayList<QuizLocation> quizLocations;
     public ArrayList<User> memberList;
     private Leaderboard leaderboard;
@@ -31,6 +39,11 @@ public class Quiz {
         return this.quizLocations;
     }
 
+
+    /*
+     * This method is used to add an extra player to the current Quiz.
+     * Kills the scheduler, and creates a new one which will spawn a cron-job every sec* seconds.
+     */
     public void addMember(User user, int sec){
         memberList.add(user);
         leaderboard.add(user);

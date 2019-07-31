@@ -13,11 +13,11 @@ public class Polygon {
     ArrayList<Point> points;
     double minX, maxX, minY, maxY;
 
-    /*public Polygon(){
+    public Polygon(){
         this.points = new ArrayList<>();
         maxX = maxY = 0;
         minX = minY = 9999999;
-    }*/
+    }
 
     public Polygon(String WKT){
         this.points = new ArrayList<>();
@@ -47,17 +47,18 @@ public class Polygon {
         if(y < minY) minY = y;
     }
 
-    /*public ArrayList<Point> getPoints(){return this.points;}
-    public Object[] getPointsAsArray(){return this.points.toArray();}*/
+    public ArrayList<Point> getPoints(){return this.points;}
+    public Object[] getPointsAsArray(){return this.points.toArray();}
     public int size(){
         return points.size();
     }
 
 
-    /*public double getMaxX(){return this.maxX;}
+    public double getMaxX(){return this.maxX;}
     public double getMaxY(){return this.maxY;}
     public double getMinX(){return this.minX;}
-    public double getMinY(){return this.minY;}*/
+    public double getMinY(){return this.minY;}
+
 
     /*
      * Transfrom a polygon string in the Well-Known Text format
@@ -94,18 +95,19 @@ public class Polygon {
     }
 
 
-    public boolean isInside(Point p) {
+    /* This function decides whether a given point is within or outside
+     * of the current polygon. Using the Ray Casting Algorithm.
+     */
 
+    public boolean isInside(Point p) {
         if (points == null || p == null){
             return false;
         }
-
         int n = size();
         if (n < 3) return false;
 
         Point extreme = new Point(Double.POSITIVE_INFINITY, p.y);
         Segment ray = new Segment(p, extreme);
-
 
         if (p.x < minX || p.x > maxX || p.y < minY || p.y > maxY) {
             return false;
@@ -135,6 +137,6 @@ public class Polygon {
 
         return count % 2 != 0;
 
-    }
+    }//end isInside
 
 }//end Polygon

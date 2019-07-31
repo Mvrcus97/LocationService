@@ -1,16 +1,20 @@
-package telia.cpa.location;
+package telia.cpa.location.clients;
 
 import no.differitas._2015._10.coveragearea.*;
 import telia.cpa.location.Point;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.*;
 
-import javax.xml.namespace.QName;
-import javax.xml.ws.BindingProvider;
-import javax.xml.ws.Service;
-import javax.xml.ws.handler.MessageContext;
+
+/* This class is used to represent a client which communicates
+ * with the CoverageArea2 SOAP API.
+ *
+ * The main features include returning a (x,y) location of a given
+ * telephone number.
+ *
+ * Our API only supports Telia simcards, and it is also quite slow. Printout of response time
+ * is given for each individual call. Timings vary a lot and are uncontrollable.
+ */
 
 public class CoverageAreaInvoker {
     CoverageAreaService_Service service;
@@ -24,8 +28,8 @@ public class CoverageAreaInvoker {
         this.service =  new CoverageAreaService_Service();
         this.port = service.getCoverageAreaServicePort();
         this.request = new CoverageAreaReq();
-        request.setUsername("Summer Intern Tes");
-        request.setRef("Nydaln");
+        request.setUsername("Summer Intern Test");
+        request.setRef("Nydalen");
         lastCalled = -10;
         //System.out.println("Client Successfully Created\n ");
     }
@@ -55,7 +59,6 @@ public class CoverageAreaInvoker {
                     this.result = port.coverage(request);
                     System.out.println("Response time: " + (System.nanoTime() - start)/1000000 + "ms");
                     this.lastCalled = System.currentTimeMillis();
-                    //System.out.println("After update");
                 } catch (Exception e){System.out.println("UpdateResult error: ");}
         }
         if(result == null){
@@ -165,7 +168,7 @@ public class CoverageAreaInvoker {
         while (scanner.hasNext()){
             if (scanner.hasNextDouble()) {
                 pair[pair_pos] = scanner.nextDouble();
-                //System.out.println("Found: " + pair[pair_pos%2]);
+                //System.out.println("Found: " + pair[pair_pos]);
                 pair_pos ++;
                 if(pair_pos == 2){
                     points[idx++] = new Point(pair[1], pair[0]);
@@ -176,7 +179,8 @@ public class CoverageAreaInvoker {
             else{
                 scanner.next();
             }
-        }
+        }//end while
+
         scanner.close();
         return points;
     }
