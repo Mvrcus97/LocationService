@@ -1,6 +1,6 @@
 package telia.cpa.location;
 
-import com.sun.tools.internal.xjc.reader.xmlschema.BindGreen;
+
 import no.differitas._2006._09.messaging.sms.*;
 
 import javax.xml.ws.BindingProvider;
@@ -49,7 +49,7 @@ public class SmsInvoker {
         username = reader.next();
         password = reader.next();
 
-        //System.out.println("Username: " + username + ", password: " + password);
+        System.out.println("Username: " + username + ", password: " + password);
 
     }
 

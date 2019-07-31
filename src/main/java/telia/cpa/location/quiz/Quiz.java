@@ -2,6 +2,7 @@ package telia.cpa.location.quiz;
 
 import telia.cpa.location.Polygon;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +12,13 @@ public class Quiz {
     public ArrayList<User> memberList;
     private Leaderboard leaderboard;
     UpdatePosition updatePosition;
+    ArrayList<Promo> listPromos;
 
     public Quiz(){
         this.quizLocations = new ArrayList<>();
         this.memberList = new ArrayList<>();
         this.leaderboard = new Leaderboard();
+
 
     }
 
@@ -145,6 +148,8 @@ public class Quiz {
 
     }//end createQuizTest
 
+    public void createPromos(){
 
+    }
 
 }// end Quiz
