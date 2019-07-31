@@ -13,7 +13,6 @@ import no.telia.cpa.location.Polygon;
 import no.telia.cpa.location.clients.CoverageAreaInvoker;
 import no.telia.cpa.location.main;
 import no.telia.cpa.location.quiz.Leaderboard;
-import no.telia.cpa.location.quiz.Promo;
 import no.telia.cpa.location.quiz.QuizLocation;
 import no.telia.cpa.location.quiz.User;
 
@@ -108,12 +107,6 @@ public class UpdatePositionJob implements Job {
 
 
     public void updateUser(User user){
-
-        Promo promo = new Promo("NON", 0);
-        if (user.getLevel() < quizLocations.size()) {
-            promo = quizLocations.get(user.getLevel()).getPromo();
-        }
-
         user.updateLevel();
         leaderboard.sort();
 
@@ -130,9 +123,12 @@ public class UpdatePositionJob implements Job {
 
 
     public void sendSMS(User user){
+        String promo = quizLocations.get(user.getLevel()-1).getPromo();
         StringBuilder levelUptxt = new StringBuilder("Congratulations, ");
         levelUptxt.append(user.getFirstName()).append("!\n\nNew Level: ").append(user.getLevel()).append("\nYour score is: ").append(user.getScore()).append("\n\n");
-        levelUptxt.append("Here is your reward:\nhttp://telia-summer-interns.s3-website-eu-west-1.amazonaws.com/\n\n");
+        if(promo != null){
+            levelUptxt.append("Here is your reward:\n").append(promo).append("\n\n");
+        }
 
         StringBuilder leaderboardTxt = new StringBuilder("-----LEADERBOARD-----\n");
         User u;
@@ -146,7 +142,7 @@ public class UpdatePositionJob implements Job {
             leaderboardTxt.append("\n");
         }
 
-        leaderboardTxt.append("--------------------------\n\n\nFind your next secret Location: ").append(quizLocations.get(user.getLevel()-1).getHint());
+        leaderboardTxt.append("--------------------------\n\nFind your next secret Location: ").append(quizLocations.get(user.getLevel()-1).getHint());
 
         levelUptxt.append(leaderboardTxt);
         client.addMessage(user.getMsisdn(), levelUptxt.toString());
