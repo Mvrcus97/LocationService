@@ -1,18 +1,25 @@
-package telia.cpa.location.quiz;
+package no.telia.cpa.location.quiz;
 
-import telia.cpa.location.Polygon;
+import no.telia.cpa.location.Polygon;
+import no.telia.cpa.location.quiz.cronJob.UpdatePosition;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Quiz {
+/* The Quiz class is one of the most central classes in this project.
+ * The Quiz represents an entire instance of a QuizGame, and acts as a "Game Master" / State-keeper.
+ *
+ * A game includes a list of QuizLocations, a memberlist, a Leaderboard and also
+ * a cron job called UpdatePosition which task is to check through the memberlist and
+ * update the game-state dependent on the players' position.
+ */
 
+public class Quiz {
     private ArrayList<QuizLocation> quizLocations;
     public ArrayList<User> memberList;
     private Leaderboard leaderboard;
     UpdatePosition updatePosition;
-    ArrayList<Promo> listPromos;
 
     public Quiz(){
         this.quizLocations = new ArrayList<>();
@@ -34,6 +41,11 @@ public class Quiz {
         return this.quizLocations;
     }
 
+
+    /*
+     * This method is used to add an extra player to the current Quiz.
+     * Kills the scheduler, and creates a new one which will spawn a cron-job every sec* seconds.
+     */
     public void addMember(User user, int sec){
         memberList.add(user);
         leaderboard.add(user);
@@ -80,15 +92,23 @@ public class Quiz {
         promo = new Promo("Telia",40);
         actual = new Polygon("POLYGON ((10.766267113933509 59.952661724072996,10.766787462482398 59.95189887810627,10.767635040531104 59.95208959124402,10.766267113933509 59.952661724072996))");
         margin = new Polygon("POLYGON ((10.768277942062582 59.95317436842931,10.766904651046957 59.95335701625844,10.764200984359945 59.9532818084507,10.76407223832723 59.95208920468926,10.764673053146566 59.951541237221186,10.766701369001112 59.95143307329731,10.76850381345912 59.95175540925114,10.768277942062582 59.95317436842931))");
-        quizLocation = new QuizLocation(actual, margin,"purple", promo);
+        quizLocation = new QuizLocation(actual, margin,"Telia Building", promo);
         addQuizLocation(quizLocation);
+
+        promo = new Promo("Telia2",45);
+        actual = new Polygon("POLYGON ((10.766267113933509 59.952661724072996,10.766787462482398 59.95189887810627,10.767635040531104 59.95208959124402,10.766267113933509 59.952661724072996))");
+        margin = new Polygon("POLYGON ((10.768277942062582 59.95317436842931,10.766904651046957 59.95335701625844,10.764200984359945 59.9532818084507,10.76407223832723 59.95208920468926,10.764673053146566 59.951541237221186,10.766701369001112 59.95143307329731,10.76850381345912 59.95175540925114,10.768277942062582 59.95317436842931))");
+        quizLocation = new QuizLocation(actual, margin,"Telia Building", promo);
+        addQuizLocation(quizLocation);
+
+
 
         /*
 
         // BUSS STATION
         actual = new Polygon("POLYGON ((10.768163822998076 59.95144956371486,10.76894971023944 59.95151671726368,10.769172333587676 59.951201094401206,10.768397175182372 59.95104663956474,10.768163822998076 59.95144956371486))");
         margin = new Polygon("POLYGON ((10.766820776807435 59.951807221673675,10.769910681592592 59.952110751356564,10.770838725911744 59.95101212189333,10.767555702077516 59.95056621299303,10.766820776807435 59.951807221673675))");
-        quizLocation = new QuizLocation(actual, margin,"Busstopp");
+        quizLocation = new QuizLocation(actual, margin,"Busstopp", null);
         addQuizLocation(quizLocation);
 
         // BI BUILDING
@@ -145,11 +165,8 @@ public class Quiz {
         margin = new Polygon("POLYGON ((10.7344982175332 59.916622150755124,10.738542988727659 59.91553041231573,10.736091449688047 59.91373676406511,10.731912568042844 59.91485276349873,10.7344982175332 59.916622150755124))");
         quizLocation = new QuizLocation(actual, margin,"Her er det mange unge advokater");
         addQuizLocation(quizLocation);*/
-
     }//end createQuizTest
 
-    public void createPromos(){
 
-    }
 
 }// end Quiz

@@ -1,7 +1,19 @@
-package telia.cpa.location.quiz;
+package no.telia.cpa.location.quiz;
 
-import java.io.File;
-import java.util.Scanner;
+
+
+/* Class represents a User, with a lot of information related to a user/player.
+ *
+ * Calculating score is based on a customized sigmoid function. The score system as of 31.07.2019
+ * works as follows:
+ *
+ * - The score is dependent on time. The more time a player uses to find the next location, the less
+ *   points (s)he receives.
+ * - Max points per level/location is 100. Min score is 50.
+ * - If the next location isn't found within 6 hours, a player receives min score of 50.
+ * - If the player finds the next location between 0-6 hours, the score will be scattered
+ *   between 100-50 points, following an inverse sigmoid function.
+ */
 
 public class User {
     String msisdn;
@@ -12,8 +24,6 @@ public class User {
     int level;
     int marginCount;
     double timeLastFound;
-    String username;
-    String password;
 
 
     public User(String msisdn){
@@ -58,8 +68,8 @@ public class User {
     public void updateScore(){
         double sigmoid = sigmoid(getTimeConstant());
         int extra = (int) Math.round(sigmoid * 100);
-        //if(extra > 85) extra = 100;
-       // System.out.println("Sigmoid is:" + sigmoid);
+        //if(extra > 85) extra = 100; //otherwise impossible to receive 100% score. disabled currently for testing purposes.
+        // System.out.println("Sigmoid is:" + sigmoid);
         // System.out.println("Updated score by: " + extra);
         this.score += extra;
     }

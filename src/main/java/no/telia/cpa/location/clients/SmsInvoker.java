@@ -1,12 +1,33 @@
-package telia.cpa.location;
+package no.telia.cpa.location.clients;
 
-
+import com.sun.tools.internal.xjc.reader.xmlschema.BindGreen;
 import no.differitas._2006._09.messaging.sms.*;
 
+
 import javax.xml.ws.BindingProvider;
-import javax.xml.ws.handler.MessageContext;
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Map;
+import java.util.Scanner;
+
+/* This class represents a SOAP Client. Used to communicate with the SMS BULK API.
+ *
+ * REMEMBER* To change the path of login.txt and crefCounter.txt to your correct path.
+ *
+ * - login.txt includes the login credentials for the basic authentication in 2 lines of text:
+ *      -username
+ *      -password
+ *
+ * - crefCounter.txt includes a single number used to represent the next cref-value.
+ *   For each run, the crefCounter.txt is read and updated. This is to simulate a unique
+ *   cref for each call to the API. The crefCounter.txt could be changed manually to
+ *   any number, preferably larger than 1000.
+ *
+ *
+ */
+
 
 public class SmsInvoker {
 
@@ -21,7 +42,6 @@ public class SmsInvoker {
     String password;
 
     public SmsInvoker(){
-
         this.service = new SmsService_Service();
         this.port = service.getSmsPort();
         this.request = new SubmitReq();
@@ -31,14 +51,12 @@ public class SmsInvoker {
         this.originatingAddress = new Address();
         originatingAddress.setValue("QuizGame");
         updateLogin();
-        getCref();
-        System.out.println("client created");
+        //System.out.println("client created");
 
     }
 
     public void updateLogin(){
-
-        File txt = new File("/Users/gwv9478/Desktop/LocationService/src/main/java/telia/cpa/location/login");
+        File txt = new File("src/main/java/no/telia/cpa/location/login");
         Scanner reader = null;
         try {
             reader = new Scanner(txt);
@@ -49,55 +67,43 @@ public class SmsInvoker {
         username = reader.next();
         password = reader.next();
 
-        System.out.println("Username: " + username + ", password: " + password);
+        //System.out.println("Username: " + username + ", password: " + password);
 
     }
 
-    public void getCref(){
-
-        File txt = new File("/Users/gwv9478/Desktop/LocationService/src/main/java/telia/cpa/location/crefCounter");
+    public void updateCref(){
+        File txt = new File("src/main/java/no/telia/cpa/location/crefCounter");
+        //Read file
         Scanner reader = null;
-        try {
-            reader = new Scanner(txt);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
+        try {reader = new Scanner(txt);}
+        catch (FileNotFoundException e) {e.printStackTrace(); }
 
         this.cref = reader.next();
-
-
         int newCref = Integer.parseInt(cref) + 1;
-
-
+        //Update file
         try {
-            FileWriter fw = new FileWriter("/Users/gwv9478/Desktop/LocationService/src/main/java/telia/cpa/location/crefCounter");
+            FileWriter fw = new FileWriter("src/main/java/no/telia/cpa/location/crefCounter");
             fw.write(String.valueOf(newCref));
-
             fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException e) {e.printStackTrace();}
+    }//end updateCref
 
 
-    }
-
-    //public void addMessage(Address cref, ){}
-
+    //Update the request to contain information of the next text-message, including recipient(s) and message.
     public void addMessage(String msIsdn, String textToSend){
-
         request = new SubmitReq();
-
         Address destinationAddress = new Address();
         destinationAddress.setValue(msIsdn);
 
         Text text = new Text();
         text.setValue(textToSend);
 
-       Content content = new Content();
-       content.getText().add(text);
+        Content content = new Content();
+        content.getText().add(text);
 
-       SubmitMessage message = new SubmitMessage();
+        updateCref();
+
+        SubmitMessage message = new SubmitMessage();
         message.setCref(cref);
         message.setAccount(account);
         message.setDA(destinationAddress);
@@ -111,13 +117,11 @@ public class SmsInvoker {
 
         request.getSubmitMessage().add(message);
         sendMessage();
-
-    }
+    }//end addMessage
 
     public void sendMessage(){
-
         try {
-            port.submit(request);
+          response = port.submit(request);
         } catch (SmsServiceSubmitServerFaultFaultMessage smsServiceSubmitServerFaultFaultMessage) {
             smsServiceSubmitServerFaultFaultMessage.printStackTrace();
         } catch (SmsServiceSubmitValidationFaultFaultMessage smsServiceSubmitValidationFaultFaultMessage) {
@@ -125,8 +129,7 @@ public class SmsInvoker {
         }
 
 
-        //response.getReportMessage().get(0);
-        //System.out.println("Response: " + response.getReportMessage().get(0).getStatus());
-    }
-
-}
+        String response_s = response.getReportMessage().get(0).getStatus().getValue();
+        if(!response_s.equals("200")) System.out.println("HTTP ERROR CODE: " + response.getReportMessage().get(0).getStatus().getCode() + ", Value: " +  response_s);
+    }//end sendMessage
+}//end SmsInvoker

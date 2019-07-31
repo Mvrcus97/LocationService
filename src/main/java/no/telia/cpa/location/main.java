@@ -1,6 +1,6 @@
-package telia.cpa.location;
+package no.telia.cpa.location;
 
-import telia.cpa.location.quiz.*;
+import no.telia.cpa.location.quiz.*;
 
 import org.slf4j.*;
 
@@ -10,15 +10,12 @@ public class main {
 
     public static void main(String[] args) {
 
-        System.setProperty("com.sun.xml.ws.transport.http.client.HttpTransportPipe.dump", "true");
-        System.setProperty("com.sun.xml.internal.ws.transport.http.client.HttpTransportPipe.dump", "true");
-        System.setProperty("com.sun.xml.ws.transport.http.HttpAdapter.dump", "true");
-        System.setProperty("com.sun.xml.internal.ws.transport.http.HttpAdapter.dump", "true");
+        Promo promo;
+        Polygon actual, margin;
+        QuizLocation quizLocation;
 
-        SmsInvoker client = new SmsInvoker();
-        client.addMessage("4740553014","Test melding");
 
-        /*User user;
+        User user;
 
         Quiz quiz = new Quiz();
         int sec = 11;
@@ -26,19 +23,25 @@ public class main {
         quiz.createTestQuiz();
 
         user = new User("4740553014");
-        user.setFirstName("Telia");
+        user.setFirstName("Telia Test Phone");
         quiz.addMember(user, sec);
 
-           try {
+
+        /*user = new User("4794430236");
+        user.setFirstName("Soma-Loma-Poma");
+        quiz.addMember(user, sec);
+
+
+         /*  try {
                 Thread.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
+    */
         user = new User("4740604325");
-        user.setFirstName("TeliaDue");
+        user.setFirstName("Marcus ;) ");
         quiz.addMember(user, sec);
-
+/*6
        try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
