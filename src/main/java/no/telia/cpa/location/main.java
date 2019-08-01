@@ -9,9 +9,23 @@ public class main {
     final static Logger logger = LoggerFactory.getLogger(main.class);
 
     public static void main(String[] args) {
+/*User user = new User("112");
 
-        Polygon actual, margin;
-        QuizLocation quizLocation;
+        try {
+            Thread.sleep(17300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        user.updateLevel();
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        user.updateLevel();*/
 
 
         User user;
@@ -25,23 +39,17 @@ public class main {
         user.setFirstName("Telia Test Phone");
         quiz.addMember(user, sec);
 
-
-        /*user = new User("4794430236");
-        user.setFirstName("Soma-Loma-Poma");
-        quiz.addMember(user, sec);
-
-
-         /*  try {
+          try {
                 Thread.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-    */
+
         user = new User("4740604325");
         user.setFirstName("Marcus ;) ");
         quiz.addMember(user, sec);
-/*6
-       try {
+
+       /*try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();

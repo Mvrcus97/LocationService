@@ -65,12 +65,13 @@ public class User {
         return score;
     }
     public void updateScore(int extra){this.score += extra;}
+
     public void updateScore(){
         double sigmoid = sigmoid(getTimeConstant());
         int extra = (int) Math.round(sigmoid * 100);
         //if(extra > 85) extra = 100; //otherwise impossible to receive 100% score. disabled currently for testing purposes.
-        // System.out.println("Sigmoid is:" + sigmoid);
-        // System.out.println("Updated score by: " + extra);
+         System.out.println("Sigmoid is:" + sigmoid);
+         System.out.println("Updated score by: " + extra);
         this.score += extra;
     }
 
@@ -93,18 +94,21 @@ public class User {
 
     public double getTimeLastFound(){return this.timeLastFound;}
 
-    private double createTimeConstant(){
+    private double createTimeConstantInSec(){
         double second = (System.currentTimeMillis() - timeLastFound);
         second = second/1000;
-        //System.out.println("Second:" + second);
-        return second;///(60*60);
+        System.out.println("Second:" + second);
+        return second;
 
     }
 
     public double getTimeConstant() {
-        double constant = Math.round(30*60 - createTimeConstant());
+        double maxRealTime = 18;
+        double maxConvertedTime = 6;
+        double timeUsed = createTimeConstantInSec();
+        double constant = maxConvertedTime-((timeUsed * maxConvertedTime)/maxRealTime);
         if (constant < 0) constant = 0;
-        //System.out.println("Time constant: " + constant);
+        System.out.println("Time constant: " + constant);
         return constant;
     }
 
