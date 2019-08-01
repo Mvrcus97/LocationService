@@ -94,7 +94,7 @@ public class UpdatePositionJob implements Job {
                 user.updateMarginCount();
                 System.out.println("marginCount: " + user.getMarginCount() + "\n");
 
-                    if (user.getMarginCount() >= 2) {
+                    if (user.getMarginCount() >= 4) {
                         updateUser(user);
                     }
 
@@ -114,9 +114,7 @@ public class UpdatePositionJob implements Job {
         logger.info(user.getMsisdn() + " Level up! -  "+ user.getLevel());
         sendSMS(user);
 
-        if (user.getLevel() >= quizLocations.size()) {
-            user.resetLevel();
-        }
+
     }//end updateUser
 
 
@@ -142,7 +140,11 @@ public class UpdatePositionJob implements Job {
             leaderboardTxt.append("\n");
         }
 
-        leaderboardTxt.append("--------------------------\n\nFind your next secret Location: ").append(quizLocations.get(user.getLevel()-1).getHint());
+        if (user.getLevel() >= quizLocations.size()) {
+            user.resetLevel();
+        }
+
+        leaderboardTxt.append("--------------------------\n\nFind your next secret Location: ").append(quizLocations.get(user.getLevel()).getHint());
 
         levelUptxt.append(leaderboardTxt);
         client.addMessage(user.getMsisdn(), levelUptxt.toString());
