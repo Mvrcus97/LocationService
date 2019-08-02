@@ -1,6 +1,6 @@
 package no.telia.cpa.location.clients;
 
-import com.sun.tools.internal.xjc.reader.xmlschema.BindGreen;
+//import com.sun.tools.internal.xjc.reader.xmlschema.BindGreen;
 import no.differitas._2006._09.messaging.sms.*;
 
 
@@ -56,7 +56,7 @@ public class SmsInvoker {
     }
 
     public void updateLogin(){
-        File txt = new File("src/main/java/no/telia/cpa/location/login");
+        File txt = new File("src/main/java/no/telia/cpa/location/loginSms");
         Scanner reader = null;
         try {
             reader = new Scanner(txt);
@@ -66,6 +66,11 @@ public class SmsInvoker {
 
         username = reader.next();
         password = reader.next();
+
+        Map<String, Object> reqContext = ((BindingProvider) port).getRequestContext();
+        reqContext.put(BindingProvider.USERNAME_PROPERTY, username);
+        reqContext.put(BindingProvider.PASSWORD_PROPERTY, password);
+        reqContext.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, "https://api.messaging.telia.no/smsbulk/ws/v2");
 
         //System.out.println("Username: " + username + ", password: " + password);
 
@@ -110,11 +115,6 @@ public class SmsInvoker {
         message.setOA(originatingAddress);
         message.setContent(content);
 
-        Map<String, Object> reqContext = ((BindingProvider) port).getRequestContext();
-        reqContext.put(BindingProvider.USERNAME_PROPERTY, username);
-        reqContext.put(BindingProvider.PASSWORD_PROPERTY, password);
-        reqContext.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, "https://api.messaging.telia.no/smsbulk/ws/v2");
-
         request.getSubmitMessage().add(message);
         sendMessage();
     }//end addMessage
@@ -130,6 +130,5 @@ public class SmsInvoker {
 
 
         String response_s = response.getReportMessage().get(0).getStatus().getValue();
-        if(!response_s.equals("200")) System.out.println("HTTP ERROR CODE: " + response.getReportMessage().get(0).getStatus().getCode() + ", Value: " +  response_s);
     }//end sendMessage
 }//end SmsInvoker
