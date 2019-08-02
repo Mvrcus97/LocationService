@@ -1,5 +1,6 @@
 package no.telia.cpa.location;
 
+import no.telia.cpa.location.clients.CoverageAreaInvoker;
 import no.telia.cpa.location.quiz.*;
 
 import org.slf4j.*;
@@ -9,23 +10,6 @@ public class main {
     final static Logger logger = LoggerFactory.getLogger(main.class);
 
     public static void main(String[] args) {
-/*User user = new User("112");
-
-        try {
-            Thread.sleep(17300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        user.updateLevel();
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        user.updateLevel();*/
 
 
         User user;
@@ -39,7 +23,7 @@ public class main {
         user.setFirstName("Telia Test Phone");
         quiz.addMember(user, sec);
 
-          try {
+        /*  try {
                 Thread.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();

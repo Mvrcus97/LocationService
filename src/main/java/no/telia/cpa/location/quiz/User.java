@@ -103,7 +103,7 @@ public class User {
     }
 
     public double getTimeConstant() {
-        double maxRealTime = 18;
+        double maxRealTime = 18*60;
         double maxConvertedTime = 6;
         double timeUsed = createTimeConstantInSec();
         double constant = maxConvertedTime-((timeUsed * maxConvertedTime)/maxRealTime);

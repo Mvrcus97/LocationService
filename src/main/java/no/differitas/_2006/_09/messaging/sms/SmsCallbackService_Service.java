@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "SmsCallbackService", targetNamespace = "http://differitas.no/2006/09/messaging/sms", wsdlLocation = "file:/Users/gwv9478/Desktop/LocationService/src/main/resources/wsdlCallback/telia-smscallback.wsdl.xml")
+@WebServiceClient(name = "SmsCallbackService", targetNamespace = "http://differitas.no/2006/09/messaging/sms", wsdlLocation = "file:src/main/resources/wsdlCallback/telia-smscallback.wsdl.xml")
 public class SmsCallbackService_Service
     extends Service
 {
@@ -30,7 +30,7 @@ public class SmsCallbackService_Service
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/Users/gwv9478/Desktop/LocationService/src/main/resources/wsdlCallback/telia-smscallback.wsdl.xml");
+            url = new URL("file:src/main/resources/wsdlCallback/telia-smscallback.wsdl.xml");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.1.4-b01-. --><wsdl:definitions xmlns:tns="http://differitas.no/2015/10/coveragearea" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xs="http://www.w3.org/2001/XMLSchema" name="CoverageAreaService" targetNamespace="http://differitas.no/2015/10/coveragearea">
+	<wsdl:types>
+		<xs:schema targetNamespace="http://differitas.no/2015/10/coveragearea/Imports">
+			<xs:import schemaLocation="https://wsapi.netcom.no:443/wscoveragearea2?xsd=1" namespace="http://differitas.no/2015/10/coveragearea"></xs:import>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="CoverageAreaRequest">
+		<wsdl:part name="parameters" element="tns:CoverageAreaReq"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="CoverageAreaResponse">
+		<wsdl:part name="parameters" element="tns:CoverageAreaRsp"></wsdl:part>
+	</wsdl:message>
+    <wsdl:message name="PlacenameRequest">
+		<wsdl:part name="parameters" element="tns:PlacenameReq"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="PlacenameResponse">
+		<wsdl:part name="parameters" element="tns:PlacenameRsp"></wsdl:part>
+	</wsdl:message>
+    <wsdl:message name="ServerFaultMessage">
+		<wsdl:part name="detail" element="tns:ServerFault"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ValidationFaultMessage">
+		<wsdl:part name="detail" element="tns:ValidationFault"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="CoverageAreaService">
+		<wsdl:operation name="Coverage">
+			<wsdl:input name="CoverageAreaRequest" message="tns:CoverageAreaRequest"></wsdl:input>
+			<wsdl:output name="CoverageAreaResponse" message="tns:CoverageAreaResponse"></wsdl:output>
+			<wsdl:fault name="ServerFault" message="tns:ServerFaultMessage"></wsdl:fault>
+			<wsdl:fault name="ValidationFault" message="tns:ValidationFaultMessage"></wsdl:fault>
+		</wsdl:operation>
+        <wsdl:operation name="Placename">
+			<wsdl:input name="PlacenameRequest" message="tns:PlacenameRequest"></wsdl:input>
+			<wsdl:output name="PlacenameResponse" message="tns:PlacenameResponse"></wsdl:output>
+			<wsdl:fault name="ServerFault" message="tns:ServerFaultMessage"></wsdl:fault>
+			<wsdl:fault name="ValidationFault" message="tns:ValidationFaultMessage"></wsdl:fault>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="CoverageAreaServicePort" type="tns:CoverageAreaService">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"></soap:binding>
+		<wsdl:operation name="Coverage">
+			<soap:operation soapAction="http://differitas.no/2015/10/coveragearea/CoverageAreaService/Coverage" style="document"></soap:operation>
+			<wsdl:input name="CoverageAreaRequest">
+				<soap:body use="literal"></soap:body>
+			</wsdl:input>
+			<wsdl:output name="CoverageAreaResponse">
+				<soap:body use="literal"></soap:body>
+			</wsdl:output>
+			<wsdl:fault name="ServerFault">
+				<soap:fault name="ServerFault" use="literal"></soap:fault>
+			</wsdl:fault>
+			<wsdl:fault name="ValidationFault">
+				<soap:fault name="ValidationFault" use="literal"></soap:fault>
+			</wsdl:fault>
+		</wsdl:operation>
+        <wsdl:operation name="Placename">
+			<soap:operation soapAction="http://differitas.no/2015/10/coveragearea/CoverageAreaService/Placename" style="document"></soap:operation>
+			<wsdl:input name="PlacenameRequest">
+				<soap:body use="literal"></soap:body>
+			</wsdl:input>
+			<wsdl:output name="PlacenameResponse">
+				<soap:body use="literal"></soap:body>
+			</wsdl:output>
+			<wsdl:fault name="ServerFault">
+				<soap:fault name="ServerFault" use="literal"></soap:fault>
+			</wsdl:fault>
+			<wsdl:fault name="ValidationFault">
+				<soap:fault name="ValidationFault" use="literal"></soap:fault>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="CoverageAreaService">
+		<wsdl:port name="CoverageAreaServicePort" binding="tns:CoverageAreaServicePort">
+			<soap:address location="https://wsapi.netcom.no:443/wscoveragearea2"></soap:address>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

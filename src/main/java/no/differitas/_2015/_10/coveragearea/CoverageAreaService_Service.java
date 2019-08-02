@@ -1,6 +1,7 @@
 
 package no.differitas._2015._10.coveragearea;
 
+import java.io.File;
 import java.net.Authenticator;
 import java.net.MalformedURLException;
 import java.net.PasswordAuthentication;
@@ -18,7 +19,7 @@ import static java.net.Authenticator.*;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "CoverageAreaService", targetNamespace = "http://differitas.no/2015/10/coveragearea", wsdlLocation = "https://wsapi.netcom.no/wscoveragearea2?wsdl")
+@WebServiceClient(name = "CoverageAreaService", targetNamespace = "http://differitas.no/2015/10/coveragearea", wsdlLocation = "file:src/main/resources/wsdl/wscoveragearea2.xml")
 public class CoverageAreaService_Service
     extends Service
 {
@@ -31,27 +32,9 @@ public class CoverageAreaService_Service
         URL url = null;
             WebServiceException e = null;
             try {
-                final String username = "summerint";
-                final String password = "bG7kSEz7";
-                setDefault(new Authenticator() {
-                    @Override
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(
-                                username,
-                                password.toCharArray());
-                    }
-                });
-                url = new URL("");
-                QName qname = new QName("https://wsapi.netcom.no/wscoveragearea2?wsdl", "CoverageAreaService");
-                Service service = Service.create(url, qname);
-                CoverageAreaService proxy = service.getPort(CoverageAreaService.class);
-                Map<String, Object> requestContext = ((BindingProvider) proxy).getRequestContext();
-                requestContext.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, url.toString());
-                requestContext.put(BindingProvider.USERNAME_PROPERTY, username);
-                requestContext.put(BindingProvider.PASSWORD_PROPERTY, password);
-
+                url = new URL("file:src/main/resources/wsdl/wscoveragearea2.xml");
         } catch (Exception ex) {
-
+                e = new WebServiceException(ex);
         }
         COVERAGEAREASERVICE_WSDL_LOCATION = url;
         COVERAGEAREASERVICE_EXCEPTION = e;
