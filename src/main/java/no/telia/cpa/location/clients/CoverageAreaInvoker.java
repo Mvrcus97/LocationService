@@ -3,6 +3,9 @@ package no.telia.cpa.location.clients;
 import no.differitas._2015._10.coveragearea.*;
 import no.telia.cpa.location.Point;
 
+import javax.xml.ws.BindingProvider;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 
@@ -22,7 +25,27 @@ public class CoverageAreaInvoker {
     CoverageAreaReq request;
     CoverageAreaRsp result;
     long lastCalled;
+    String username;
+    String password;
 
+    public void updateLogin(){
+        File txt = new File("src/main/java/no/telia/cpa/location/loginCoverage");
+        Scanner reader = null;
+        try {
+            reader = new Scanner(txt);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        username = reader.next();
+        password = reader.next();
+
+        Map<String, Object> reqContext = ((BindingProvider) port).getRequestContext();
+        reqContext.put(BindingProvider.USERNAME_PROPERTY, username);
+        reqContext.put(BindingProvider.PASSWORD_PROPERTY, password);
+
+
+    }
 
     public CoverageAreaInvoker(){
         this.service =  new CoverageAreaService_Service();
@@ -32,6 +55,7 @@ public class CoverageAreaInvoker {
         request.setRef("Nydalen");
         lastCalled = -10;
         //System.out.println("Client Successfully Created\n ");
+        updateLogin();
     }
 
     public CoverageAreaInvoker(String nr){
@@ -53,6 +77,7 @@ public class CoverageAreaInvoker {
     //This method makes a new call to API if more than 10 sec since last update.
     public void updateResult(){
         if(System.currentTimeMillis() - lastCalled > 10000){
+
             try{
                     //System.out.println("Updating Result...");
                     long start = System.nanoTime();
