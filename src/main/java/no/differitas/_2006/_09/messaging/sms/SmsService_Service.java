@@ -18,7 +18,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "SmsService", targetNamespace = "http://differitas.no/2006/09/messaging/sms", wsdlLocation = "file:/Users/gwv9478/Desktop/LocationService/src/main/resources/wsdl/telia-smsbulk.wsdl.xml"/* "file:/C:/Users/ssz6374/IdeaProjects/LocationService/src/main/resources/wsdl/telia-smsbulk.wsdl.xml"*/)
+@WebServiceClient(name = "SmsService", targetNamespace = "http://differitas.no/2006/09/messaging/sms", wsdlLocation = "file:src/main/resources/wsdl/telia-smsbulk.wsdl.xml")
 public class SmsService_Service
     extends Service
 {
@@ -32,7 +32,7 @@ public class SmsService_Service
         WebServiceException e = null;
         try {
             //url = new URL("file:/C:/Users/ssz6374/IdeaProjects/LocationService/src/main/resources/wsdl/telia-smsbulk.wsdl.xml");
-            url = new URL("file:/Users/gwv9478/Desktop/LocationService/src/main/resources/wsdl/telia-smsbulk.wsdl.xml");
+            url = new URL("file:src/main/resources/wsdl/telia-smsbulk.wsdl.xml");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

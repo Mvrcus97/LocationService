@@ -14,9 +14,9 @@ import java.util.Scanner;
 
 /* This class represents a SOAP Client. Used to communicate with the SMS BULK API.
  *
- * REMEMBER* To change the path of login.txt and crefCounter.txt to your correct path.
+ * REMEMBER* To change the path of loginSms.txt and crefCounter.txt to your correct path.
  *
- * - login.txt includes the login credentials for the basic authentication in 2 lines of text:
+ * - loginSms.txt includes the loginSms credentials for the basic authentication in 2 lines of text:
  *      -username
  *      -password
  *
@@ -49,7 +49,7 @@ public class SmsInvoker {
         this.account = new Address();
         account.setValue("8419");
         this.originatingAddress = new Address();
-        originatingAddress.setValue("QuizGame");
+        originatingAddress.setValue("HintSprint");
         updateLogin();
         //System.out.println("client created");
 
