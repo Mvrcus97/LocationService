@@ -96,14 +96,16 @@ game which we have been playing with in real life.
 
 #### How To Run
 For the SOAP API communication to be working you need to create the files 
-´´´
+
+```
 loginCoverage
 loginSms
-´´´
+```
+
 which both should contain the basic authentication for the two APIs. Each file should include two lines: first line consisting of username, and second line consisting of password. 
 
 The project can be ran as-is by compiling all java files and running the main class. Another way to run it is to run the gradle task: fatJar. 
-This will create a LocationService.jar which contains all the included compiled code. This Jar can then be deployed to for example Amazon Web Service using Elastic Beanstalk.
+This will create a LocationService.jar which contains all the included compiled code. This Jar can then be ran locally, transfered to another computer or deployed to for example Amazon Web Service using Elastic Beanstalk.
 
 
 
