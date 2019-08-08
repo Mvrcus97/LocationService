@@ -93,10 +93,12 @@ The test game consists of a number of different locations including dummy-promot
 game which we have been playing with in real life.
 
 
-<!-- How To Run -->
 
 ## How To Run
 THIS SECTION IS HOW TO RUN TODO
+
+
+
 
 ### Structure
 
