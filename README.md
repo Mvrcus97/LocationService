@@ -11,17 +11,15 @@
 [![Contributors][contributors-shield]][contributors-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-
+[![Product Name Screen Shot][product-screenshot]]()
 
 <!-- PROJECT LOGO -->
-<br />
-<p align="center">
-  Telia Summer Internship
+
+<p align="center">Telia Summer Internship
 
   <h3 align="center">HINT SPRINT</h3>
 
-  <p align="center">
-    An awesome location-hunt application
+  <p align="center">An awesome location-hunt application
     
 
 <!-- TABLE OF CONTENTS -->
@@ -38,7 +36,6 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwji07P91vLjAhXOGewKHZcuDZwQjRx6BAgBEAQ&url=http%3A%2F%2Fpresse.telia.no%2Fimages%2Ftelia-norge-logo-691469&psig=AOvVaw1yqiNIuYrVEcrp7wwBI3kv&ust=1565333265569417)
 
 HintSprint has been our main project throughout the summer. In short, we have created a treasure-hunt application where the objective
 is to locate the different secret locations within a given Game. A "Game" exists as a list of secret locations, and the Users are to discover all these
@@ -201,4 +198,4 @@ Project Link: [https://github.com/mvrcus97/LocationService](https://github.com/M
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/marcustierney97
-[product-screenshot]: https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwji07P91vLjAhXOGewKHZcuDZwQjRx6BAgBEAQ&url=http%3A%2F%2Fpresse.telia.no%2Fimages%2Ftelia-norge-logo-691469&psig=AOvVaw1yqiNIuYrVEcrp7wwBI3kv&ust=1565333265569417
+[product-screenshot]: wnh05jyix9lijxfafljp.jpg
