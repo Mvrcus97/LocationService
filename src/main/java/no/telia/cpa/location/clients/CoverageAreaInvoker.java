@@ -4,8 +4,7 @@ import no.differitas._2015._10.coveragearea.*;
 import no.telia.cpa.location.Point;
 
 import javax.xml.ws.BindingProvider;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.*;
 
 
@@ -29,16 +28,16 @@ public class CoverageAreaInvoker {
     String password;
 
     public void updateLogin(){
-        File txt = new File("src/main/java/no/telia/cpa/location/loginCoverage");
-        Scanner reader = null;
+
+        InputStream in = getClass().getResourceAsStream("/loginCoverage");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
         try {
-            reader = new Scanner(txt);
-        } catch (FileNotFoundException e) {
+            username = reader.readLine();
+            password = reader.readLine();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
-        username = reader.next();
-        password = reader.next();
 
         Map<String, Object> reqContext = ((BindingProvider) port).getRequestContext();
         reqContext.put(BindingProvider.USERNAME_PROPERTY, username);
@@ -48,7 +47,12 @@ public class CoverageAreaInvoker {
     }
 
     public CoverageAreaInvoker(){
-        this.service =  new CoverageAreaService_Service();
+        try {
+            this.service = new CoverageAreaService_Service();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         this.port = service.getCoverageAreaServicePort();
         this.request = new CoverageAreaReq();
         request.setUsername("Summer Intern Test");

@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import no.telia.cpa.location.Point;
 import no.telia.cpa.location.Polygon;
 import no.telia.cpa.location.clients.CoverageAreaInvoker;
-import no.telia.cpa.location.main;
+import no.telia.cpa.location.Main;
 import no.telia.cpa.location.quiz.Leaderboard;
 import no.telia.cpa.location.quiz.QuizLocation;
 import no.telia.cpa.location.quiz.User;
@@ -28,7 +28,7 @@ import no.telia.cpa.location.quiz.User;
 @DisallowConcurrentExecution
 public class UpdatePositionJob implements Job {
 
-    final static Logger logger = LoggerFactory.getLogger(main.class);
+    final static Logger logger = LoggerFactory.getLogger(Main.class);
     CoverageAreaInvoker coverageClient = new CoverageAreaInvoker();
     SmsInvoker client = new SmsInvoker();
     ArrayList<User> memberList;
@@ -110,7 +110,7 @@ public class UpdatePositionJob implements Job {
         user.updateLevel();
         leaderboard.sort();
 
-        System.out.println(user.getMsisdn() + " Level up! - Now on level " + user.getLevel() + " 🏋️‍ ");
+        System.out.println(user.getMsisdn() + " Level up! - Now on level " + user.getLevel() + " ! :D");
         logger.info(user.getMsisdn() + " Level up! -  "+ user.getLevel());
         sendSMS(user);
 

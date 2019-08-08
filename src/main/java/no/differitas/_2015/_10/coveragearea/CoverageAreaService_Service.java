@@ -1,7 +1,9 @@
 
 package no.differitas._2015._10.coveragearea;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.net.Authenticator;
 import java.net.MalformedURLException;
 import java.net.PasswordAuthentication;
@@ -19,7 +21,7 @@ import static java.net.Authenticator.*;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "CoverageAreaService", targetNamespace = "http://differitas.no/2015/10/coveragearea", wsdlLocation = "file:src/main/resources/wsdl/wscoveragearea2.xml")
+@WebServiceClient(name = "CoverageAreaService", targetNamespace = "http://differitas.no/2015/10/coveragearea", wsdlLocation = "resources/main/wsdl/wscoveragearea2.wsdl")
 public class CoverageAreaService_Service
     extends Service
 {
@@ -32,9 +34,10 @@ public class CoverageAreaService_Service
         URL url = null;
             WebServiceException e = null;
             try {
-                url = new URL("file:src/main/resources/wsdl/wscoveragearea2.xml");
+                url =  CoverageAreaService_Service.class.getResource("/wsdl/wscoveragearea2.wsdl");
         } catch (Exception ex) {
                 e = new WebServiceException(ex);
+                e.printStackTrace();
         }
         COVERAGEAREASERVICE_WSDL_LOCATION = url;
         COVERAGEAREASERVICE_EXCEPTION = e;

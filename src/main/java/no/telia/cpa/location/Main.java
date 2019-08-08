@@ -1,16 +1,20 @@
 package no.telia.cpa.location;
 
-import no.telia.cpa.location.clients.CoverageAreaInvoker;
+import no.telia.cpa.location.clients.SmsInvoker;
 import no.telia.cpa.location.quiz.*;
 
 import org.slf4j.*;
 
-public class main {
+public class Main {
 
-    final static Logger logger = LoggerFactory.getLogger(main.class);
+    final static Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
 
+       /* System.setProperty("com.sun.xml.ws.transport.http.client.HttpTransportPipe.dump", "true");
+        System.setProperty("com.sun.xml.internal.ws.transport.http.client.HttpTransportPipe.dump", "true");
+        System.setProperty("com.sun.xml.ws.transport.http.HttpAdapter.dump", "true");
+        System.setProperty("com.sun.xml.internal.ws.transport.http.HttpAdapter.dump", "true");*/
 
         User user;
 

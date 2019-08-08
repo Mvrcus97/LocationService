@@ -49,11 +49,8 @@ public class Quiz {
         memberList.add(user);
         leaderboard.add(user);
         if(this.updatePosition != null) {
-            try {
-                this.updatePosition.shutdown();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            try {this.updatePosition.shutdown();}
+            catch (Exception e) {e.printStackTrace();}
         }
         this.updatePosition = new UpdatePosition(sec, memberList, quizLocations, leaderboard);
     }
@@ -106,7 +103,7 @@ public class Quiz {
         quizLocation.setPromo("http://telia-summer-interns.s3-website-eu-west-1.amazonaws.com/storo.html");
         addQuizLocation(quizLocation);*/
 
-        //Ullevål Stasjon
+        /*  //Ullevål Stasjon
         actual = new Polygon("POLYGON ((10.731541544208994 59.94626313536613,10.730946093807688 59.94660701390119,10.732104808102122 59.947114765528646,10.73241594434785 59.94728670082493,10.733000665913096 59.94750967808437,10.733531743298045 59.947195360309784,10.731541544208994 59.94626313536613))");
         margin = new Polygon("POLYGON ((10.730795890102854 59.9448969889213,10.727952748547068 59.94643910490592,10.733048945675364 59.94842709283495,10.73737266660737 59.94745997846364,10.730795890102854 59.9448969889213))");
         quizLocation = new QuizLocation(actual, margin,"En stasjon nær et kjent fotballstadion");

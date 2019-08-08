@@ -5,12 +5,10 @@ import no.differitas._2006._09.messaging.sms.*;
 
 
 import javax.xml.ws.BindingProvider;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.UUID;
 
 /* This class represents a SOAP Client. Used to communicate with the SMS BULK API.
  *
@@ -56,41 +54,27 @@ public class SmsInvoker {
     }
 
     public void updateLogin(){
-        File txt = new File("src/main/java/no/telia/cpa/location/loginSms");
-        Scanner reader = null;
+        InputStream in = getClass().getResourceAsStream("/loginSms");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
         try {
-            reader = new Scanner(txt);
-        } catch (FileNotFoundException e) {
+            username = reader.readLine();
+            password = reader.readLine();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
-        username = reader.next();
-        password = reader.next();
 
         Map<String, Object> reqContext = ((BindingProvider) port).getRequestContext();
         reqContext.put(BindingProvider.USERNAME_PROPERTY, username);
         reqContext.put(BindingProvider.PASSWORD_PROPERTY, password);
         reqContext.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, "https://api.messaging.telia.no/smsbulk/ws/v2");
 
-        //System.out.println("Username: " + username + ", password: " + password);
-
     }
 
     public void updateCref(){
-        File txt = new File("src/main/java/no/telia/cpa/location/crefCounter");
-        //Read file
-        Scanner reader = null;
-        try {reader = new Scanner(txt);}
-        catch (FileNotFoundException e) {e.printStackTrace(); }
-
-        this.cref = reader.next();
-        int newCref = Integer.parseInt(cref) + 1;
-        //Update file
-        try {
-            FileWriter fw = new FileWriter("src/main/java/no/telia/cpa/location/crefCounter");
-            fw.write(String.valueOf(newCref));
-            fw.close();
-        } catch (IOException e) {e.printStackTrace();}
+        //New UUID:
+        UUID uuid = UUID.randomUUID();
+        this.cref = uuid.toString();
     }//end updateCref
 
 
