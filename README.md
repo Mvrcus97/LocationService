@@ -28,7 +28,7 @@
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
 * [Implementation Guide](#implementation-guide)
-  * 
+  * [How To Run](#how-to-run)
   * [Structure](#structure)
 * [Contact](#contact)
 
@@ -92,6 +92,11 @@ to create different locations for a given game.
 The test game consists of a number of different locations including dummy-promotions and hints. The test game is a real and testable
 game which we have been playing with in real life.
 
+
+<!-- How To Run -->
+
+## How To Run
+THIS SECTION IS HOW TO RUN TODO
 
 ### Structure
 
