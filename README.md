@@ -28,6 +28,7 @@
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
 * [Implementation Guide](#implementation-guide)
+  * 
   * [Structure](#structure)
 * [Contact](#contact)
 
@@ -118,7 +119,7 @@ QuizLocation
     - Polygon actual area
     - Polygon margin area
     - hint of where location is
-    - URL of promotions/coupons of current location</br>
+    - URL of promotions/coupons of current location
 ```
 
 
@@ -129,8 +130,8 @@ Leaderboard
 
 
 ```
-UpdatePosition<br>
-    - Scheduler which starts a new job every n seconds.</br>
+UpdatePosition
+    - Scheduler which starts a new job every n seconds.
 ```
 
 ```
