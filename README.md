@@ -38,7 +38,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwji07P91vLjAhXOGewKHZcuDZwQjRx6BAgBEAQ&url=http%3A%2F%2Fpresse.telia.no%2Fimages%2Ftelia-norge-logo-691469&psig=AOvVaw1yqiNIuYrVEcrp7wwBI3kv&ust=1565333265569417)
 
 HintSprint has been our main project throughout the summer. In short, we have created a treasure-hunt application where the objective
 is to locate the different secret locations within a given Game. A "Game" exists as a list of secret locations, and the Users are to discover all these
@@ -99,43 +99,43 @@ game which we have been playing with in real life.
 
 The structure of our project is as following:
 
-Polygon
+#Polygon<br> 
     - List of (x,y) coordinates 
-    - function to determen whether a given point (x,y) is within this polygon.
+    - function to determen whether a given point (x,y) is within this polygon.</br>
+    
 
-
-User
+#User<br>
     - msisdn(Nr.) 
     - score
     - current level
     - time since last levelUp
-    - Misc. Variables
+    - Misc. Variables</br>
 
-QuizLocation
+#QuizLocation<br>
     - Polygon actual area
     - Polygon margin area
     - hint of where location is
-    - URL of promotions/coupons of current location
+    - URL of promotions/coupons of current location</br>
     
-Leaderboard
-    - Descending sorted list of Users, sorting criteria is User.score 
+Leaderboard<br>
+    - Descending sorted list of Users, sorting criteria is User.score </br>
 
 
-UpdatePosition
-    - Scheduler which starts a new job every n seconds.
+UpdatePosition<br>
+    - Scheduler which starts a new job every n seconds.</br>
 
-UpdatePositionJob
+UpdatePositionJob<br>
     - Job which executes every n seconds.
     - The job goes through the given memberList and checks whether each User is within their
-      current hidden location. If true, update the Users´ level and score, and send out a congrats. SMS. 
+      current hidden location. If true, update the Users´ level and score, and send out a congrats. SMS. </br>
 
 
-Quiz - (The GameMaster)
+Quiz - (The GameMaster)<br>
     - User-List
     - Leaderboard
     - QuizLocation-List
     - UpdatePositioner
-    - The Quiz-class represents the entire game. An instance of a Quiz represents an entire game.
+    - The Quiz-class represents the entire game. An instance of a Quiz represents an entire game.</br>
     
     
     
@@ -149,12 +149,12 @@ These classes are used as an interface with the generated client-stub classes. I
 to create text files containing the basic authentication credentials for the APIs. The text files should be called loginSms and loginCoverage,
 containing two lines. The first line should be the username, and the second line should be the corresponding password. Some additional information about the clients:
 
-CoverageAreaInvoker
+CoverageAreaInvoker<br>
     - Update the position of a given msisdn (only make calls to the API if more than 10sec from last call of given number)
-    - Misc. methods of returning information received from the CoverageArea2 API. Such as getLocation().
+    - Misc. methods of returning information received from the CoverageArea2 API. Such as getLocation().</br>
 
-SmsInvoker
-    - Send a custom String to the given msisdn. 
+SmsInvoker<br>
+    - Send a custom String to the given msisdn. </br>
     
    
 
@@ -201,4 +201,4 @@ Project Link: [https://github.com/mvrcus97/LocationService](https://github.com/M
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/marcustierney97
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwji07P91vLjAhXOGewKHZcuDZwQjRx6BAgBEAQ&url=http%3A%2F%2Fpresse.telia.no%2Fimages%2Ftelia-norge-logo-691469&psig=AOvVaw1yqiNIuYrVEcrp7wwBI3kv&ust=1565333265569417
