@@ -96,44 +96,58 @@ game which we have been playing with in real life.
 
 The structure of our project is as following:
 
-#Polygon<br> 
-    - List of (x,y) coordinates 
-    - function to determen whether a given point (x,y) is within this polygon.</br>
-    
 
-#User<br>
+```
+Polygon
+    - List of (x,y) coordinates 
+    - function to determen whether a given point (x,y) is within this polygon.
+```
+
+
+```
+User
     - msisdn(Nr.) 
     - score
     - current level
     - time since last levelUp
-    - Misc. Variables</br>
+    - Misc. Variables
+```
 
-#QuizLocation<br>
+```
+QuizLocation
     - Polygon actual area
     - Polygon margin area
     - hint of where location is
     - URL of promotions/coupons of current location</br>
-    
-Leaderboard<br>
-    - Descending sorted list of Users, sorting criteria is User.score </br>
+```
 
 
+```
+Leaderboard
+    - Descending sorted list of Users, sorting criteria is User.score 
+```
+
+
+```
 UpdatePosition<br>
     - Scheduler which starts a new job every n seconds.</br>
+```
 
-UpdatePositionJob<br>
+```
+UpdatePositionJob
     - Job which executes every n seconds.
     - The job goes through the given memberList and checks whether each User is within their
-      current hidden location. If true, update the Users´ level and score, and send out a congrats. SMS. </br>
+      current hidden location. If true, update the Users´ level and score, and send out a congrats. SMS. 
+```
 
-
-Quiz - (The GameMaster)<br>
+```
+Quiz - (The GameMaster)
     - User-List
     - Leaderboard
     - QuizLocation-List
     - UpdatePositioner
-    - The Quiz-class represents the entire game. An instance of a Quiz represents an entire game.</br>
-    
+    - The Quiz-class represents the entire game. An instance of a Quiz represents an entire game.
+``` 
     
     
 In addition to these classes we have some logic for implementing the communication with the SOAP APIs. 
@@ -146,13 +160,16 @@ These classes are used as an interface with the generated client-stub classes. I
 to create text files containing the basic authentication credentials for the APIs. The text files should be called loginSms and loginCoverage,
 containing two lines. The first line should be the username, and the second line should be the corresponding password. Some additional information about the clients:
 
-CoverageAreaInvoker<br>
+```
+CoverageAreaInvoker
     - Update the position of a given msisdn (only make calls to the API if more than 10sec from last call of given number)
-    - Misc. methods of returning information received from the CoverageArea2 API. Such as getLocation().</br>
+    - Misc. methods of returning information received from the CoverageArea2 API. Such as getLocation().
+```
 
-SmsInvoker<br>
-    - Send a custom String to the given msisdn. </br>
-    
+```
+SmsInvoker
+    - Send a custom String to the given msisdn.    
+```
    
 
 <!-- CONTACT -->
@@ -166,36 +183,13 @@ Project Link: [https://github.com/mvrcus97/LocationService](https://github.com/M
 
 
 
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Img Shields](https://shields.io)
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Pages](https://pages.github.com)
-* [Animate.css](https://daneden.github.io/animate.css)
-* [Loaders.css](https://connoratherton.com/loaders)
-* [Slick Carousel](https://kenwheeler.github.io/slick)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [Sticky Kit](http://leafo.net/sticky-kit)
-* [JVectorMap](http://jvectormap.com)
-* [Font Awesome](https://fontawesome.com)
-
 
 
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=flat-square
 [contributors-url]: https://github.com/Mvrcus97/LocationService/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=flat-square
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=flat-square
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/marcustierney97
 [product-screenshot]: wnh05jyix9lijxfafljp.jpg
